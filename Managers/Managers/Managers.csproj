@@ -108,6 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Messenger\GerericMessage.cs" />
     <Compile Include="Model\Account.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
@@ -141,9 +142,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ManagerModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ModelViews\Account_AccountType.cs" />
     <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\DataAccess.cs" />
+    <Compile Include="Services\IDataAccess.cs" />
     <Compile Include="Tools\BoolVisibleInvisibleConverter.cs" />
     <Compile Include="Tools\EnterKeyHelper.cs" />
     <Compile Include="Tools\ToggleControl.cs" />

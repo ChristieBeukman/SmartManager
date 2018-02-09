@@ -1,4 +1,4 @@
-<Application xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+ <Application xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              x:Class="Managers.App" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
@@ -16,6 +16,14 @@
             <DataTemplate DataType="{x:Type vmAcc:AccountManagementViewModel}">
                 <viewAcc:AccountManagementView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vmAcc:AddAccountViewModel}">
+                <viewAcc:AddAccountView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vmAcc:EditAccountViewModel}">
+                <viewAcc:EditAccountView/>
+            </DataTemplate>
+
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/StyleDictionary.xaml"/>
