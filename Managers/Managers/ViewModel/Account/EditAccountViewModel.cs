@@ -60,6 +60,8 @@ namespace Managers.ViewModel.Account
         private bool _AccountTypeVisible = true;
         private bool _CurrencyInvisible = false;
         private bool _CurrencyVisible = true;
+        private bool _SaveVisible = false;
+        private bool _DeleteVisible= false;
 
         public bool AccountNameReadOnly
         {
@@ -170,6 +172,34 @@ namespace Managers.ViewModel.Account
             {
                 _CurrencyVisible = value;
                 RaisePropertyChanged("CurrencyVisible");
+            }
+        }
+
+        public bool SaveVisible
+        {
+            get
+            {
+                return _SaveVisible;
+            }
+
+            set
+            {
+                _SaveVisible = value;
+                RaisePropertyChanged("SaveVisible");
+            }
+        }
+
+        public bool DeleteVisible
+        {
+            get
+            {
+                return _DeleteVisible;
+            }
+
+            set
+            {
+                _DeleteVisible = value;
+                RaisePropertyChanged("DeleteVisible");
             }
         }
 
@@ -476,6 +506,16 @@ namespace Managers.ViewModel.Account
             if (message == "GetAccounts")
             {
                 GetAccounts();
+            }
+            if (message == "Delete")
+            {
+                DeleteVisible = true;
+                SaveVisible = false;
+            }
+            if (message == "Save")
+            {
+                SaveVisible = true;
+                DeleteVisible = false;
             }
         }
 

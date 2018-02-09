@@ -348,9 +348,18 @@
                         <Button Grid.Column="0"
                                 Height="30"
                                 Width="30"
+                                Visibility="{Binding editAccountViewModel.SaveVisible,Converter={StaticResource Convert},Source={StaticResource Locator}}"
                                 Background="Black"
                                 Command="{Binding editAccountViewModel.UpdateAccountCommand,Source={StaticResource Locator}}"
                                 Style="{DynamicResource GlassSaveButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,1,0"/>
+                        <Button Grid.Column="0"
+                                Height="30"
+                                Width="30"
+                                Visibility="{Binding editAccountViewModel.DeleteVisible,Converter={StaticResource Convert},Source={StaticResource Locator}}"
+                                Background="Black"
+                                Command="{Binding editAccountViewModel.UpdateAccountCommand,Source={StaticResource Locator}}"
+                                Style="{DynamicResource DeleteGlassButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,1,0"/>
+
 
                         <Ellipse Grid.Column="1"
                                  Height="40"

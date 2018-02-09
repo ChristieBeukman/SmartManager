@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Managers.ViewModel.Account
 {
@@ -51,7 +52,7 @@ namespace Managers.ViewModel.Account
             VisibleEditControl = true;
             VisibleDeleteControl = true;
             GridRow = 3;
-
+            SendUpdateMessage("Save");
             CurrentViewModel = AccountManagementViewModel.editAccountViewModel;
         }
 
@@ -127,8 +128,20 @@ namespace Managers.ViewModel.Account
             VisibleEditControl = true;
             VisibleDeleteControl = true;
             GridRow = 5;
+            SendUpdateMessage("Delete");
             CurrentViewModel = AccountManagementViewModel.editAccountViewModel;
 
         }
+
+
+        #region Messages
+
+        void SendUpdateMessage(string message)
+        {
+            MessengerInstance.Send<GenericMessage<string>>(new GenericMessage<string>(message));
+        }
+
+        #endregion
+
     }
 }
