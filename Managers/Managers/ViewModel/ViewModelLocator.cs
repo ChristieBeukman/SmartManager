@@ -1,20 +1,9 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:Managers"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Managers.ViewModel.Account;
 
 namespace Managers.ViewModel
 {
@@ -31,18 +20,13 @@ namespace Managers.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<AccountManagementViewModel>();
+            SimpleIoc.Default.Register<EditAccountViewModel>();
+            SimpleIoc.Default.Register<AddAccountViewModel>();
+
         }
 
         public MainViewModel Main
@@ -52,7 +36,32 @@ namespace Managers.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public AccountManagementViewModel accountManagementViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AccountManagementViewModel>();
+            }
+        }
+
+        public EditAccountViewModel editAccountViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditAccountViewModel>();
+            }
+        }
+
+        public AddAccountViewModel addAccountViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddAccountViewModel>();
+            }
+        }
+
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
