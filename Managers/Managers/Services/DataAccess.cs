@@ -27,7 +27,8 @@ namespace Managers.Services
 
         public void DeleteAccount(Account a)
         {
-            throw new NotImplementedException();
+            _Context.Entry(a).State = System.Data.Entity.EntityState.Deleted;
+            _Context.SaveChanges();
         }
 
         public ObservableCollection<Account_AccountType> GetAccounts()
@@ -78,5 +79,34 @@ namespace Managers.Services
             return acc;
         }
 
+        public ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId)
+        {
+            ObservableCollection<IncomeTransaction> inc = new ObservableCollection<IncomeTransaction>();
+
+            var Query = from i in _Context.IncomeTransactions
+                         where i.AccountId == accountId
+                         select i;
+
+            foreach (var item in Query)
+            {
+                inc.Add(item);
+            }
+            return inc;
+        }
+
+        public ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteIncomeTransaction(IncomeTransaction i)
+        {
+            if (i != null)
+            {
+                _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
+                _Context.SaveChanges();
+            }
+            
+        }
     }
 }

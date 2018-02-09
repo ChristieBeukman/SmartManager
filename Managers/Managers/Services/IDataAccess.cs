@@ -18,5 +18,10 @@ namespace Managers.Services
         void DeleteAccount(Account a);
         ObservableCollection<Account_AccountType> GetAccounts();
 
+        ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId);
+        void DeleteIncomeTransaction(IncomeTransaction i);
+
+        ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid);
+
     }
 }

@@ -357,7 +357,7 @@
                                 Width="30"
                                 Visibility="{Binding editAccountViewModel.DeleteVisible,Converter={StaticResource Convert},Source={StaticResource Locator}}"
                                 Background="Black"
-                                Command="{Binding editAccountViewModel.UpdateAccountCommand,Source={StaticResource Locator}}"
+                                Command="{Binding editAccountViewModel.DeleteAccountCommand,Source={StaticResource Locator}}"
                                 Style="{DynamicResource DeleteGlassButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,1,0"/>
 
 

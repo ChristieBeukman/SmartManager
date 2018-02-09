@@ -44,9 +44,12 @@ namespace Managers.ViewModel.Account
             SelectedAccount = new Account_AccountType();
             GetAccounts();
             UpdateAccountCommand = new RelayCommand(ExecuteUpdateAccount);
+            DeleteAccountCommand = new RelayCommand(ExecuteDeleteCommand);
             account = new Model.Account();
 
             MessengerInstance.Register<GenericMessage<string>>(this, ReceiveUpdateMessage);
+
+            
         }
 
         #region Toggle
@@ -516,6 +519,50 @@ namespace Managers.ViewModel.Account
             {
                 SaveVisible = true;
                 DeleteVisible = false;
+            }
+        }
+
+        #endregion
+
+        #region Delete
+
+        private ObservableCollection<IncomeTransaction> _IncomeTransactions;
+
+        public ObservableCollection<IncomeTransaction> IncomeTransactions
+        {
+            get
+            {
+                return _IncomeTransactions;
+            }
+
+            set
+            {
+                _IncomeTransactions = value;
+                RaisePropertyChanged("IncomeTransactions");
+            }
+        }
+
+        public RelayCommand DeleteAccountCommand { get; set; }
+
+        void ExecuteDeleteCommand()
+        {
+            var result = MessageBox.Show("Delete Account and all transactions for the account?", "DELETE", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    foreach (var item in _ServiceProxy.GetIncomeTransactions(SelectedAccount.AccountId))
+                    {
+                        _ServiceProxy.DeleteIncomeTransaction(item);
+                    }
+                    MoveView();
+
+                    _ServiceProxy.DeleteAccount(account);
+                    MessageBox.Show("Deleted Account");
+                    GetAccounts();
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
             }
         }
 
