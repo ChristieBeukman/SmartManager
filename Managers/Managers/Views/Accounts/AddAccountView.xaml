@@ -223,6 +223,7 @@
                                   Height="24"
                                   Width="100"
                                   Foreground="White"
+                                  SelectedIndex="0"
                                   FontFamily="Copperplate Gothic Light"
                                   SelectedItem="{Binding addAccountViewModel.SelectedCountry,Source={StaticResource Locator}}"
                                   ItemsSource="{Binding addAccountViewModel.Countries,Source={StaticResource Locator}}" Style="{DynamicResource ComboBoxStyle}">
