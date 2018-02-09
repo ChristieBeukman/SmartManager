@@ -8,13 +8,18 @@
              d1p1:Ignorable="d"
              xmlns:vm="clr-namespace:Managers.ViewModel" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vmAcc="clr-namespace:Managers.ViewModel.Account"
+             xmlns:viewAcc="clr-namespace:Managers.Views.Accounts"
              >
   <Application.Resources>
     <ResourceDictionary>
-      <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+            <DataTemplate DataType="{x:Type vmAcc:AccountManagementViewModel}">
+                <viewAcc:AccountManagementView/>
+            </DataTemplate>
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/StyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
+        </ResourceDictionary>
   </Application.Resources>
 </Application>

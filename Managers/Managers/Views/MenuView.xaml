@@ -24,7 +24,7 @@
                       Template="{DynamicResource MenuItemControlTemplate}"
                       FontFamily="Trajan Pro" 
                       Background="#7F000000"
-                      Command="{Binding Main.ViewAccountManagementCommand ,Source={StaticResource Locator}}"
+                      Command="{Binding Main.ViewAccountManagementCommand,Source={StaticResource Locator}}"
                       >
                 <MenuItem.Effect>
                     <DropShadowEffect BlurRadius="0"

@@ -15,5 +15,10 @@
     
     <DockPanel>
         <view:MenuView DockPanel.Dock="Top"/>
+        <Border DockPanel.Dock="Bottom"
+                Padding="10">
+
+            <ContentControl Content="{Binding Main.CurrentViewModel ,Source={StaticResource Locator}}"/>
+        </Border>
     </DockPanel>
 </Window>
