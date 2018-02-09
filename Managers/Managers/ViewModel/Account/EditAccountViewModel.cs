@@ -555,6 +555,10 @@ namespace Managers.ViewModel.Account
                     {
                         _ServiceProxy.DeleteIncomeTransaction(item);
                     }
+                    foreach (var item in _ServiceProxy.GetExpenseTransactions(SelectedAccount.AccountId))
+                    {
+                        _ServiceProxy.DeleteExoenseTransaction(item);
+                    }
                     MoveView();
 
                     _ServiceProxy.DeleteAccount(account);

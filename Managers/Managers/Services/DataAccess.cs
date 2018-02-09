@@ -96,7 +96,17 @@ namespace Managers.Services
 
         public ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid)
         {
-            throw new NotImplementedException();
+            ObservableCollection<ExpenseTransaction> inc = new ObservableCollection<ExpenseTransaction>();
+
+            var Query = from i in _Context.ExpenseTransactions
+                        where i.AccountId == accountid
+                        select i;
+
+            foreach (var item in Query)
+            {
+                inc.Add(item);
+            }
+            return inc;
         }
 
         public void DeleteIncomeTransaction(IncomeTransaction i)
@@ -107,6 +117,15 @@ namespace Managers.Services
                 _Context.SaveChanges();
             }
             
+        }
+
+        public void DeleteExoenseTransaction(ExpenseTransaction i)
+        {
+            if (i != null)
+            {
+                _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
+                _Context.SaveChanges();
+            }
         }
     }
 }

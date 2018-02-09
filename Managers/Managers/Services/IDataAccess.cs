@@ -22,6 +22,7 @@ namespace Managers.Services
         void DeleteIncomeTransaction(IncomeTransaction i);
 
         ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid);
+        void DeleteExoenseTransaction(ExpenseTransaction i);
 
     }
 }
