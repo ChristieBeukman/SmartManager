@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Managers.Model;
+using Managers.Model.ModelViews;
 
 namespace Managers.Services
 {
@@ -29,12 +30,24 @@ namespace Managers.Services
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Account> GetAccounts()
+        public ObservableCollection<Account_AccountType> GetAccounts()
         {
-            ObservableCollection<Account> acc = new ObservableCollection<Account>();
+            ObservableCollection<Account_AccountType> acc = new ObservableCollection<Account_AccountType>();
 
-            var Query = from a in _Context.Accounts
-                        select a;
+            var Query = (from a in _Context.Accounts
+                         join t in _Context.AccountTypes
+                         on a.AccountTypeId equals t.AccountTypeId
+                         select new Account_AccountType
+                         {
+                             AccountTypeId = a.AccountTypeId,
+                             AccountId = a.AccountId,
+                             AccountNum = a.AccountNum,
+                             Balance = a.Balance,
+                             Bank = a.Bank,
+                             CurrencyCountry = a.CurrencyCountry,
+                             Name = a.Name,
+                             TypeName = t.TypeName
+                        }).ToList();
             foreach (var item in Query)
             {
                 acc.Add(item);
@@ -45,7 +58,8 @@ namespace Managers.Services
 
         public void UpdateAccount(Account a)
         {
-            throw new NotImplementedException();
+            _Context.Entry(a).State = System.Data.Entity.EntityState.Modified;
+            _Context.SaveChanges();
         }
 
         #endregion

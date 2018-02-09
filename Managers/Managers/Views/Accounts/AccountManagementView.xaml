@@ -114,8 +114,34 @@
                                           Height="24"
                                           Visibility="{Binding accountManagementViewModel.VisibleEditControl, Converter={StaticResource converter}, Source={StaticResource Locator}}"
                                           Width="100"
+                                          Foreground="White"
+                                          FontFamily="Copperplate Gothic Light" 
+                                          FontSize="10"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding editAccountViewModel.Accounts,Source={StaticResource Locator}}"
+                                          SelectedItem="{Binding editAccountViewModel.SelectedAccount ,Source={StaticResource Locator}}"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          HorizontalAlignment="Right"/>
+                                          HorizontalAlignment="Right">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                    Text="{Binding Name}" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="Balance"/>
+                                                <TextBlock Grid.Column="2"
+                                                     Text="{Binding Balance,StringFormat=C,ConverterCulture=en-ZA}" />
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+
+                                </ComboBox>
                                 <Button Grid.Row="4"
                                         Height="35"
                                         Width="200"

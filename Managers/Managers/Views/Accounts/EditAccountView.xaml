@@ -157,6 +157,7 @@
                                  FontSize="10"
                                  Style="{DynamicResource GlassTextBox}"
                                  tool:EnterKeyHelper.EnterKeyCommand="{Binding editAccountViewModel.ToggleAccountNameCommand, Source={StaticResource Locator}}"
+                                 Text="{Binding editAccountViewModel.SelectedAccount.Name ,Source={StaticResource Locator}}"
                                  IsReadOnly="{Binding editAccountViewModel.AccountNameReadOnly,Source={StaticResource Locator}}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
@@ -193,7 +194,7 @@
                                  Visibility="{Binding editAccountViewModel.AccountTypeVisible,Converter={StaticResource Convert},Source={StaticResource Locator}}"
                                  FontFamily="Copperplate Gothic Light" 
                                  FontSize="10"
-                                 Text="{Binding editAccountViewModel.account.Bank ,Source={StaticResource Locator}}"
+                                 Text="{Binding editAccountViewModel.SelectedAccount.TypeName,Source={StaticResource Locator}}"
                                  Style="{DynamicResource TextBoxStyle}"
                                  tool:EnterKeyHelper.EnterKeyCommand="{Binding editAccountViewModel.ToggleAccountTypeCommand, Source={StaticResource Locator}}"
                                  IsReadOnly="True">
@@ -211,7 +212,7 @@
                                  Foreground="White"
                                  FontFamily="Copperplate Gothic Light" 
                                  FontSize="10"
-                                 Text="{Binding editAccountViewModel.account.Bank ,Source={StaticResource Locator}}"
+                                 Text="{Binding editAccountViewModel.SelectedAccount.Bank ,Source={StaticResource Locator}}"
                                  Style="{DynamicResource GlassTextBox}"
                                  tool:EnterKeyHelper.EnterKeyCommand="{Binding editAccountViewModel.ToggleBankCommand, Source={StaticResource Locator}}"
                                  IsReadOnly="{Binding editAccountViewModel.BankNameReadOnly,Source={StaticResource Locator}}">
@@ -231,7 +232,7 @@
                                  Foreground="White"
                                  FontFamily="Copperplate Gothic Light" 
                                  FontSize="10"
-                                 Text="{Binding editAccountViewModel.account.AccountNum,Source={StaticResource Locator}}"
+                                 Text="{Binding editAccountViewModel.SelectedAccount.AccountNum,Source={StaticResource Locator}}"
                                  Style="{DynamicResource GlassTextBox}"
                                  tool:EnterKeyHelper.EnterKeyCommand="{Binding editAccountViewModel.ToggleAccNumCommand , Source={StaticResource Locator}}"
                                  IsReadOnly="{Binding editAccountViewModel.AccNumReadOnly,Source={StaticResource Locator}}">
@@ -279,7 +280,7 @@
                                  Grid.Column="1"
                                  Height="24"
                                  Width="100"
-                                 Text="{Binding editAccountViewModel.account.Balance,StringFormat=C,ConverterCulture=en-ZA ,Source={StaticResource Locator}}"
+                                 Text="{Binding editAccountViewModel.SelectedAccount.CurrencyCountry,StringFormat=C,ConverterCulture=en-ZA ,Source={StaticResource Locator}}"
                                  Foreground="White"
                                  FontFamily="Copperplate Gothic Light" 
                                  FontSize="10"
@@ -300,7 +301,7 @@
                                  Grid.Column="1"
                                  Height="24"
                                  Width="100"
-                                 Text="{Binding editAccountViewModel.account.Balance,StringFormat=C,ConverterCulture=en-ZA ,Source={StaticResource Locator}}"
+                                 Text="{Binding editAccountViewModel.SelectedAccount.Balance,StringFormat=C,ConverterCulture=en-ZA ,Source={StaticResource Locator}}"
                                  Foreground="White"
                                  FontFamily="Copperplate Gothic Light" 
                                  FontSize="10"
@@ -348,7 +349,7 @@
                                 Height="30"
                                 Width="30"
                                 Background="Black"
-                                Command="{Binding editAccountViewModel.AddAccountCommand,Source={StaticResource Locator}}"
+                                Command="{Binding editAccountViewModel.UpdateAccountCommand,Source={StaticResource Locator}}"
                                 Style="{DynamicResource GlassSaveButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,1,0"/>
 
                         <Ellipse Grid.Column="1"

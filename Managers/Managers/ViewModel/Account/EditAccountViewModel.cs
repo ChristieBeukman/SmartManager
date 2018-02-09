@@ -11,6 +11,7 @@ using System.Windows;
 using Managers.Model;
 using Managers.Services;
 using Managers.Tools;
+using Managers.Model.ModelViews;
 
 namespace Managers.ViewModel.Account
 {
@@ -37,6 +38,12 @@ namespace Managers.ViewModel.Account
             AccountTypes = new ObservableCollection<AccountType>();
             SelectedAccountType = new AccountType();
             GetAccountTypes();
+
+            Accounts = new ObservableCollection<Account_AccountType>();
+            SelectedAccount = new Account_AccountType();
+            GetAccounts();
+            UpdateAccountCommand = new RelayCommand(ExecuteUpdateAccount);
+            account = new Model.Account();
         }
 
         #region Toggle
@@ -229,6 +236,13 @@ namespace Managers.ViewModel.Account
             AccountNameReadOnly = true;
             CurrencyVisible = true;
             CurrencyInvisible = false;
+            if (SelectedAccountType != null)
+            {
+                SelectedAccount.AccountTypeId = SelectedAccountType.AccountTypeId;
+                SelectedAccount.TypeName = SelectedAccountType.TypeName;
+            }
+            
+            RaisePropertyChanged("SelectedAccount");
         }
 
         void ExecuteToggleCurrency()
@@ -241,7 +255,9 @@ namespace Managers.ViewModel.Account
             AccountNameReadOnly = true;
             AccountTypeVisible = true;
             AccountTypeInvisible = false;
-         
+            SelectedAccount.CurrencyCountry = SelectedCountry.Name;
+            RaisePropertyChanged("SelectedAccount");
+
         }
 
         #endregion
@@ -305,7 +321,7 @@ namespace Managers.ViewModel.Account
         }
 
         #endregion
-
+        
         #region AccountType
         private ObservableCollection<AccountType> _AccountTypes;
         private AccountType _SelectedAccountType;
@@ -338,6 +354,7 @@ namespace Managers.ViewModel.Account
             }
         }
 
+
         void GetAccountTypes()
         {
             AccountTypes.Clear();
@@ -345,6 +362,105 @@ namespace Managers.ViewModel.Account
             {
                 AccountTypes.Add(item);
             }
+        }
+
+        #endregion
+
+        #region Accoutns
+
+        private ObservableCollection<Account_AccountType> _Accounts;
+        private Account_AccountType _SelectedAccount;
+        private Model.Account _account;
+
+        public Model.Account account
+        {
+            get
+            {
+                return _account;
+            }
+
+            set
+            {
+                _account = value;
+                RaisePropertyChanged("account");
+            }
+        }
+
+
+        public ObservableCollection<Account_AccountType> Accounts
+        {
+            get
+            {
+                return _Accounts;
+            }
+
+            set
+            {
+                _Accounts = value;
+                RaisePropertyChanged("Accounts");
+            }
+        }
+
+        public Account_AccountType SelectedAccount
+        {
+            get
+            {
+                return _SelectedAccount;
+            }
+
+            set
+            {
+                _SelectedAccount = value;
+                RaisePropertyChanged("SelectedAccount");
+            }
+        }
+
+        void GetAccounts()
+        {
+            Accounts.Clear();
+            foreach (var item in _ServiceProxy.GetAccounts())
+            {
+                Accounts.Add(item);
+            }
+        }
+
+        #endregion
+
+        #region Update
+
+        public RelayCommand UpdateAccountCommand { get; set; }
+
+        void ExecuteUpdateAccount()
+        {
+            var result = MessageBox.Show("Save changes?", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    MoveView();
+                    _ServiceProxy.UpdateAccount(account);
+                    GetAccounts();
+                    MessageBox.Show("Updated");
+                    break;
+                case MessageBoxResult.No:
+                    GetAccounts();
+                    GetAccountTypes();
+                    GetCountries();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void MoveView()
+        {
+            account.AccountId = SelectedAccount.AccountId;
+            account.Name = SelectedAccount.Name;
+            account.Bank = SelectedAccount.Bank;
+            account.AccountNum = SelectedAccount.AccountNum;
+            account.Balance = SelectedAccount.Balance;
+            account.AccountTypeId = SelectedAccount.AccountTypeId;
+            account.CurrencyCountry = SelectedAccount.CurrencyCountry;
         }
 
         #endregion

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Managers.Model;
+using Managers.Model.ModelViews;
 
 namespace Managers.Services
 {
@@ -15,7 +16,7 @@ namespace Managers.Services
         void AddAccount(Account a);
         void UpdateAccount(Account a);
         void DeleteAccount(Account a);
-        ObservableCollection<Account> GetAccounts();
+        ObservableCollection<Account_AccountType> GetAccounts();
 
     }
 }
