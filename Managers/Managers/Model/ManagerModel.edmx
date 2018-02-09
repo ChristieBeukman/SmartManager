@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Bank" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AccountNum" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Balance" Type="money" Nullable="false" />
+          <Property Name="AccountTypeId" Type="int" Nullable="false" />
+          <Property Name="CurrencyCountry" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeId" />
+          </Key>
+          <Property Name="AccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpenseCategory">
+          <Key>
+            <PropertyRef Name="ExpenseCategoryId" />
+          </Key>
+          <Property Name="ExpenseCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpenseTransaction">
+          <Key>
+            <PropertyRef Name="ExpenseTransactionId" />
+          </Key>
+          <Property Name="ExpenseTransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="PaymentTypeId" Type="int" Nullable="false" />
+          <Property Name="ExpenseCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncomeCategory">
+          <Key>
+            <PropertyRef Name="IncomeCategoryId" />
+          </Key>
+          <Property Name="IncomeCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncomeTransaction">
+          <Key>
+            <PropertyRef Name="IncomeTransactionId" />
+          </Key>
+          <Property Name="IncomeTransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="PaymentTypeId" Type="int" Nullable="false" />
+          <Property Name="IncomeCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeId" />
+          </Key>
+          <Property Name="PaymentTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Account_AccountType">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="AccountTypeId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="AccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpenseTransaction_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ExpenseTransaction" Type="Self.ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpenseTransaction_Category">
+          <End Role="ExpenseCategory" Type="Self.ExpenseCategory" Multiplicity="1" />
+          <End Role="ExpenseTransaction" Type="Self.ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenseCategory">
+              <PropertyRef Name="ExpenseCategoryId" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="ExpenseCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpenseTransaction_PaymentType">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="ExpenseTransaction" Type="Self.ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeId" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncomeTransaction_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="IncomeTransaction" Type="Self.IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncomeTransaction_Category">
+          <End Role="IncomeCategory" Type="Self.IncomeCategory" Multiplicity="1" />
+          <End Role="IncomeTransaction" Type="Self.IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncomeCategory">
+              <PropertyRef Name="IncomeCategoryId" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="IncomeCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncomeTransaction_PaymentType">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
+          <End Role="IncomeTransaction" Type="Self.IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeId" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" />
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" store:Type="Tables" />
+          <EntitySet Name="ExpenseCategory" EntityType="Self.ExpenseCategory" store:Type="Tables" />
+          <EntitySet Name="ExpenseTransaction" EntityType="Self.ExpenseTransaction" store:Type="Tables" />
+          <EntitySet Name="IncomeCategory" EntityType="Self.IncomeCategory" store:Type="Tables" />
+          <EntitySet Name="IncomeTransaction" EntityType="Self.IncomeTransaction" store:Type="Tables" />
+          <EntitySet Name="PaymentType" EntityType="Self.PaymentType" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_AccountType" Association="Self.FK_Account_AccountType">
+            <End Role="AccountType" EntitySet="AccountType" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpenseTransaction_Account" Association="Self.FK_ExpenseTransaction_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpenseTransaction_Category" Association="Self.FK_ExpenseTransaction_Category">
+            <End Role="ExpenseCategory" EntitySet="ExpenseCategory" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpenseTransaction_PaymentType" Association="Self.FK_ExpenseTransaction_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncomeTransaction_Account" Association="Self.FK_IncomeTransaction_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncomeTransaction_Category" Association="Self.FK_IncomeTransaction_Category">
+            <End Role="IncomeCategory" EntitySet="IncomeCategory" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncomeTransaction_PaymentType" Association="Self.FK_IncomeTransaction_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Model.Account" />
+          <EntitySet Name="AccountTypes" EntityType="Model.AccountType" />
+          <EntitySet Name="ExpenseCategories" EntityType="Model.ExpenseCategory" />
+          <EntitySet Name="ExpenseTransactions" EntityType="Model.ExpenseTransaction" />
+          <EntitySet Name="IncomeCategories" EntityType="Model.IncomeCategory" />
+          <EntitySet Name="IncomeTransactions" EntityType="Model.IncomeTransaction" />
+          <EntitySet Name="PaymentTypes" EntityType="Model.PaymentType" />
+          <AssociationSet Name="FK_Account_AccountType" Association="Model.FK_Account_AccountType">
+            <End Role="AccountType" EntitySet="AccountTypes" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpenseTransaction_Account" Association="Model.FK_ExpenseTransaction_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncomeTransaction_Account" Association="Model.FK_IncomeTransaction_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpenseTransaction_Category" Association="Model.FK_ExpenseTransaction_Category">
+            <End Role="ExpenseCategory" EntitySet="ExpenseCategories" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpenseTransaction_PaymentType" Association="Model.FK_ExpenseTransaction_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+            <End Role="ExpenseTransaction" EntitySet="ExpenseTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncomeTransaction_Category" Association="Model.FK_IncomeTransaction_Category">
+            <End Role="IncomeCategory" EntitySet="IncomeCategories" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncomeTransaction_PaymentType" Association="Model.FK_IncomeTransaction_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+            <End Role="IncomeTransaction" EntitySet="IncomeTransactions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AccountNum" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="AccountTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyCountry" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountType" Relationship="Model.FK_Account_AccountType" FromRole="Account" ToRole="AccountType" />
+          <NavigationProperty Name="ExpenseTransactions" Relationship="Model.FK_ExpenseTransaction_Account" FromRole="Account" ToRole="ExpenseTransaction" />
+          <NavigationProperty Name="IncomeTransactions" Relationship="Model.FK_IncomeTransaction_Account" FromRole="Account" ToRole="IncomeTransaction" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeId" />
+          </Key>
+          <Property Name="AccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Model.FK_Account_AccountType" FromRole="AccountType" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="ExpenseCategory">
+          <Key>
+            <PropertyRef Name="ExpenseCategoryId" />
+          </Key>
+          <Property Name="ExpenseCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ExpenseTransactions" Relationship="Model.FK_ExpenseTransaction_Category" FromRole="ExpenseCategory" ToRole="ExpenseTransaction" />
+        </EntityType>
+        <EntityType Name="ExpenseTransaction">
+          <Key>
+            <PropertyRef Name="ExpenseTransactionId" />
+          </Key>
+          <Property Name="ExpenseTransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ExpenseCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Model.FK_ExpenseTransaction_Account" FromRole="ExpenseTransaction" ToRole="Account" />
+          <NavigationProperty Name="ExpenseCategory" Relationship="Model.FK_ExpenseTransaction_Category" FromRole="ExpenseTransaction" ToRole="ExpenseCategory" />
+          <NavigationProperty Name="PaymentType" Relationship="Model.FK_ExpenseTransaction_PaymentType" FromRole="ExpenseTransaction" ToRole="PaymentType" />
+        </EntityType>
+        <EntityType Name="IncomeCategory">
+          <Key>
+            <PropertyRef Name="IncomeCategoryId" />
+          </Key>
+          <Property Name="IncomeCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IncomeTransactions" Relationship="Model.FK_IncomeTransaction_Category" FromRole="IncomeCategory" ToRole="IncomeTransaction" />
+        </EntityType>
+        <EntityType Name="IncomeTransaction">
+          <Key>
+            <PropertyRef Name="IncomeTransactionId" />
+          </Key>
+          <Property Name="IncomeTransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IncomeCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Model.FK_IncomeTransaction_Account" FromRole="IncomeTransaction" ToRole="Account" />
+          <NavigationProperty Name="IncomeCategory" Relationship="Model.FK_IncomeTransaction_Category" FromRole="IncomeTransaction" ToRole="IncomeCategory" />
+          <NavigationProperty Name="PaymentType" Relationship="Model.FK_IncomeTransaction_PaymentType" FromRole="IncomeTransaction" ToRole="PaymentType" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeId" />
+          </Key>
+          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ExpenseTransactions" Relationship="Model.FK_ExpenseTransaction_PaymentType" FromRole="PaymentType" ToRole="ExpenseTransaction" />
+          <NavigationProperty Name="IncomeTransactions" Relationship="Model.FK_IncomeTransaction_PaymentType" FromRole="PaymentType" ToRole="IncomeTransaction" />
+        </EntityType>
+        <Association Name="FK_Account_AccountType">
+          <End Type="Model.AccountType" Role="AccountType" Multiplicity="1" />
+          <End Type="Model.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="AccountTypeId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="AccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpenseTransaction_Account">
+          <End Type="Model.Account" Role="Account" Multiplicity="1" />
+          <End Type="Model.ExpenseTransaction" Role="ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncomeTransaction_Account">
+          <End Type="Model.Account" Role="Account" Multiplicity="1" />
+          <End Type="Model.IncomeTransaction" Role="IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpenseTransaction_Category">
+          <End Type="Model.ExpenseCategory" Role="ExpenseCategory" Multiplicity="1" />
+          <End Type="Model.ExpenseTransaction" Role="ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenseCategory">
+              <PropertyRef Name="ExpenseCategoryId" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="ExpenseCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpenseTransaction_PaymentType">
+          <End Type="Model.PaymentType" Role="PaymentType" Multiplicity="1" />
+          <End Type="Model.ExpenseTransaction" Role="ExpenseTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeId" />
+            </Principal>
+            <Dependent Role="ExpenseTransaction">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncomeTransaction_Category">
+          <End Type="Model.IncomeCategory" Role="IncomeCategory" Multiplicity="1" />
+          <End Type="Model.IncomeTransaction" Role="IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncomeCategory">
+              <PropertyRef Name="IncomeCategoryId" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="IncomeCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncomeTransaction_PaymentType">
+          <End Type="Model.PaymentType" Role="PaymentType" Multiplicity="1" />
+          <End Type="Model.IncomeTransaction" Role="IncomeTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeId" />
+            </Principal>
+            <Dependent Role="IncomeTransaction">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ManagerEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="Model.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="CurrencyCountry" ColumnName="CurrencyCountry" />
+                <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="AccountNum" ColumnName="AccountNum" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="Model.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseCategories">
+            <EntityTypeMapping TypeName="Model.ExpenseCategory">
+              <MappingFragment StoreEntitySet="ExpenseCategory">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExpenseCategoryId" ColumnName="ExpenseCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseTransactions">
+            <EntityTypeMapping TypeName="Model.ExpenseTransaction">
+              <MappingFragment StoreEntitySet="ExpenseTransaction">
+                <ScalarProperty Name="ExpenseCategoryId" ColumnName="ExpenseCategoryId" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ExpenseTransactionId" ColumnName="ExpenseTransactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncomeCategories">
+            <EntityTypeMapping TypeName="Model.IncomeCategory">
+              <MappingFragment StoreEntitySet="IncomeCategory">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="IncomeCategoryId" ColumnName="IncomeCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncomeTransactions">
+            <EntityTypeMapping TypeName="Model.IncomeTransaction">
+              <MappingFragment StoreEntitySet="IncomeTransaction">
+                <ScalarProperty Name="IncomeCategoryId" ColumnName="IncomeCategoryId" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IncomeTransactionId" ColumnName="IncomeTransactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="Model.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentType">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
