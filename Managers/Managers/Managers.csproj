@@ -108,6 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Messenger\GerericMessage.cs" />
     <Compile Include="Model\Account.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>

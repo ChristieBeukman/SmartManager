@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -44,6 +45,8 @@ namespace Managers.ViewModel.Account
             GetAccounts();
             UpdateAccountCommand = new RelayCommand(ExecuteUpdateAccount);
             account = new Model.Account();
+
+            MessengerInstance.Register<GenericMessage<string>>(this, ReceiveUpdateMessage);
         }
 
         #region Toggle
@@ -461,6 +464,19 @@ namespace Managers.ViewModel.Account
             account.Balance = SelectedAccount.Balance;
             account.AccountTypeId = SelectedAccount.AccountTypeId;
             account.CurrencyCountry = SelectedAccount.CurrencyCountry;
+        }
+
+        #endregion
+
+        #region Messaging
+
+        void ReceiveUpdateMessage(GenericMessage<string> genericMessage)
+        {
+            string message = genericMessage.Content;
+            if (message == "GetAccounts")
+            {
+                GetAccounts();
+            }
         }
 
         #endregion

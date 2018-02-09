@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -293,12 +294,22 @@ namespace Managers.ViewModel.Account
                     account.Name = string.Empty;
                     account.CurrencyCountry = string.Empty;
                     MessageBox.Show("Saved");
+                    SendUpdateMessage("GetAccounts");
                     break;
                 case MessageBoxResult.No:
                     break;
                 default:
                     break;
             }
+        }
+
+        #endregion
+
+        #region Messages
+
+        void SendUpdateMessage(string message)
+        {
+            MessengerInstance.Send<GenericMessage<string>>(new GenericMessage<string>(message));
         }
 
         #endregion
