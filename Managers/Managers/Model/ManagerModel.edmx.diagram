@@ -5,20 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="133df7613dcf4a53b3aba79ecace78f1" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Account" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AccountType" Width="1.5" PointX="1.5" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ExpenseCategory" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ExpenseTransaction" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.IncomeCategory" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.IncomeTransaction" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PaymentType" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Account_AccountType" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ExpenseTransaction_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IncomeTransaction_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ExpenseTransaction_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ExpenseTransaction_PaymentType" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IncomeTransaction_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_IncomeTransaction_PaymentType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Account" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.AccountType" Width="1.5" PointX="1.5" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.ExpenseCategory" Width="1.5" PointX="0.75" PointY="11.625" />
+        <EntityTypeShape EntityType="Model.ExpenseTransaction" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.IncomeCategory" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.IncomeTransaction" Width="1.5" PointX="6" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.PaymentType" Width="1.5" PointX="0.75" PointY="4.625" />
+        <AssociationConnector Association="Model.FK_Account_AccountType" />
+        <AssociationConnector Association="Model.FK_ExpenseTransaction_Account" />
+        <AssociationConnector Association="Model.FK_IncomeTransaction_Account" />
+        <AssociationConnector Association="Model.FK_ExpenseTransaction_Category" />
+        <AssociationConnector Association="Model.FK_ExpenseTransaction_PaymentType" />
+        <AssociationConnector Association="Model.FK_IncomeTransaction_Category" />
+        <AssociationConnector Association="Model.FK_IncomeTransaction_PaymentType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
