@@ -144,6 +144,9 @@
     <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tools\BoolVisibleInvisibleConverter.cs" />
+    <Compile Include="Tools\EnterKeyHelper.cs" />
+    <Compile Include="Tools\ToggleControl.cs" />
     <Compile Include="ViewModel\Account\AccountManagementViewModel.cs" />
     <Compile Include="ViewModel\Account\AddAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
