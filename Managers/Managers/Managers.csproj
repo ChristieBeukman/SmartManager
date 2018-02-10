@@ -143,6 +143,7 @@
       <DependentUpon>ManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelViews\Account_AccountType.cs" />
+    <Compile Include="Model\ModelViews\Income_Accounts_Category.cs" />
     <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
