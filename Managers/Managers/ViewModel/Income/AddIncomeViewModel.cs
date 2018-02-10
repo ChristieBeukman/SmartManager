@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -223,8 +224,21 @@ namespace Managers.ViewModel.Income
 
         void ExecuteAddIncome()
         {
-            IncTransaction.AccountId = SelectedAccount.AccountId;
-            IncTransaction.IncomeCategoryId = SelectedCategory.IncomeCategoryId;
+            if (IncTransaction.Date >= DateTime.Now)
+            {
+                IncTransaction.AccountId = SelectedAccount.AccountId;
+                IncTransaction.IncomeCategoryId = SelectedCategory.IncomeCategoryId;
+                IncTransaction.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
+                SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
+                _ServiceProxy.UpdateAccount(SelectedAccount);
+                _ServiceProxy.AddIncome(IncTransaction);
+                MessageBox.Show("Added");
+            }
+            else
+            {
+                MessageBox.Show("Date cannot be before present");
+            }
+            
         }
         #endregion
 

@@ -157,9 +157,10 @@
                                     Grid.Row="2"
                                     Height="24"
                                     Style="{DynamicResource DatePickerStyle}" 
-                                     SelectedDate="{Binding incomeTransactionViewModel.IncTrans.Date,Source={StaticResource Locator}}"
+                                     SelectedDate="{Binding addIncomeViewModel.IncTransaction.Date,Source={StaticResource Locator}}"
                                     Foreground="White" 
-                                    Margin="15,9,28,8" DisplayDate="{Binding incomeTransactionViewModel.IncTrans.Date, Source={StaticResource Locator}}"
+                                    Margin="15,9,28,8" FirstDayOfWeek="Monday" 
+                                   
                                     />
                         <!--Amount-->
                         <TextBox Grid.Row="3"       
@@ -167,7 +168,7 @@
                                 Foreground="White"
                                  Height="24"
                                 FontFamily="Copperplate Gothic Light" 
-                                 Text="{Binding incomeTransactionViewModel.IncTrans.Amount,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
+                                 Text="{Binding addIncomeViewModel.IncTransaction.Amount,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
                                 Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="15,8,28,9" />
                         <Grid Grid.Column="1"
                               Grid.Row="4">
@@ -210,7 +211,7 @@
                                  Height="24"
                                  Foreground="White"
                                  Width="170"
-                                 Text="{Binding incomeTransactionViewModel.IncTrans.Details ,Source={StaticResource Locator}}"
+                                 Text="{Binding addIncomeViewModel.IncTransaction.Details ,Source={StaticResource Locator}}"
                                 FontFamily="Copperplate Gothic Light" 
                                 Style="{DynamicResource TextBoxStyle}" FontSize="10" />
 
@@ -250,7 +251,7 @@
                             Height="35"
                             Width="35"
                             Background="Black"
-                            Command="{Binding incomeTransactionViewModel.AddIncomeTransactionCommand,Source={StaticResource Locator}}"
+                            Command="{Binding addIncomeViewModel.AddIncomeCommand,Source={StaticResource Locator}}"
                             Style="{DynamicResource GlassSaveButton}"/>
 
                     <Ellipse Grid.Column="1"
