@@ -65,6 +65,7 @@ namespace Managers.Services
 
         #endregion
 
+        #region AccountType
         public ObservableCollection<AccountType> GetAccountTypes()
         {
             ObservableCollection<AccountType> acc = new ObservableCollection<AccountType>();
@@ -79,13 +80,17 @@ namespace Managers.Services
             return acc;
         }
 
+        #endregion
+
+        #region Expense
+
         public ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId)
         {
             ObservableCollection<IncomeTransaction> inc = new ObservableCollection<IncomeTransaction>();
 
             var Query = from i in _Context.IncomeTransactions
-                         where i.AccountId == accountId
-                         select i;
+                        where i.AccountId == accountId
+                        select i;
 
             foreach (var item in Query)
             {
@@ -93,6 +98,19 @@ namespace Managers.Services
             }
             return inc;
         }
+
+        public void DeleteExoenseTransaction(ExpenseTransaction i)
+        {
+            if (i != null)
+            {
+                _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
+                _Context.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Income
 
         public ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid)
         {
@@ -116,16 +134,23 @@ namespace Managers.Services
                 _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
                 _Context.SaveChanges();
             }
-            
+
         }
 
-        public void DeleteExoenseTransaction(ExpenseTransaction i)
+        public void AddIncome(IncomeTransaction i)
         {
-            if (i != null)
-            {
-                _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
-                _Context.SaveChanges();
-            }
+            _Context.IncomeTransactions.Add(i);
+            _Context.SaveChanges();
         }
+
+        public void UpdateIncome(IncomeTransaction i)
+        {
+            _Context.Entry(i).State = System.Data.Entity.EntityState.Modified;
+            _Context.SaveChanges();
+        }
+        #endregion
+
+
+
     }
 }
