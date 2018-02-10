@@ -12,15 +12,28 @@ namespace Managers.Services
     public interface IDataAccess
     {
         ObservableCollection<AccountType> GetAccountTypes();
-
+        //Accounts
         void AddAccount(Account a);
         void UpdateAccount(Account a);
         void DeleteAccount(Account a);
         ObservableCollection<Account_AccountType> GetAccounts();
+        ObservableCollection<Account> GetAccount();
 
+        //Income
         ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId);
+        void AddIncome(IncomeTransaction i);
+        void UpdateIncome(IncomeTransaction i);
         void DeleteIncomeTransaction(IncomeTransaction i);
 
+        //IncomeCategory
+        ObservableCollection<IncomeCategory> GetIncomeCategories();
+        void AddCategory(IncomeCategory i);
+        void UpdateCategory(IncomeCategory i);
+        void DeleteCategory(IncomeCategory i);
+
+        //Payment Type
+        ObservableCollection<PaymentType> GetPaymentTypes();
+        //Expense
         ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid);
         void DeleteExoenseTransaction(ExpenseTransaction i);
 

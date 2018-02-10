@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Managers.ViewModel.Account;
+using Managers.ViewModel.Income;
 
 namespace Managers.ViewModel
 {
@@ -22,7 +23,7 @@ namespace Managers.ViewModel
             }
         }
 
-        #region CurrentViewModel
+        #region Account
         private static readonly AccountManagementViewModel accountManagementViewModel = new AccountManagementViewModel();
 
         public RelayCommand ViewAccountManagementCommand { get; set; }
@@ -33,12 +34,36 @@ namespace Managers.ViewModel
         }
 
         #endregion
+
+        #region AddIncome
+        private static readonly AddIncomeViewModel addIncomeViewModel = new AddIncomeViewModel();
+        public RelayCommand ViewAddIncomeCommand { get; set; }
+
+        void ExecuteViewAddIncome()
+        {
+            CurrentViewModel = MainViewModel.addIncomeViewModel;
+        }
+        #endregion
+
+        #region editIncome
+        private static readonly EditIncomeViewModel editIncomeViewModel= new EditIncomeViewModel();
+        public RelayCommand ViewEditIncomeCommand { get; set; }
+
+        void ExecuteViewEditIncome()
+        {
+            CurrentViewModel = MainViewModel.editIncomeViewModel;
+        }
+
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
             ViewAccountManagementCommand = new RelayCommand(ExecuteViewAccountManagement);
+            ViewAddIncomeCommand = new RelayCommand(ExecuteViewAddIncome);
+            ViewEditIncomeCommand = new RelayCommand(ExecuteViewEditIncome);
         }
     }
 }

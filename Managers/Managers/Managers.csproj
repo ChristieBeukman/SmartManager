@@ -143,6 +143,7 @@
       <DependentUpon>ManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelViews\Account_AccountType.cs" />
+    <Compile Include="Model\ModelViews\Income_Accounts_Category.cs" />
     <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
@@ -154,6 +155,8 @@
     <Compile Include="ViewModel\Account\AccountManagementViewModel.cs" />
     <Compile Include="ViewModel\Account\AddAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
+    <Compile Include="ViewModel\Income\AddIncomeViewModel.cs" />
+    <Compile Include="ViewModel\Income\EditIncomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\Accounts\AccountManagementView.xaml.cs">
@@ -164,6 +167,12 @@
     </Compile>
     <Compile Include="Views\Accounts\EditAccountView.xaml.cs">
       <DependentUpon>EditAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Income\AddIncomeView.xaml.cs">
+      <DependentUpon>AddIncomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Income\EditIncomeView.xaml.cs">
+      <DependentUpon>EditIncomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
@@ -192,6 +201,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Income\AddIncomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Income\EditIncomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,6 +224,10 @@
     <Page Include="Views\Styles\ComboBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\DatePickerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\DeleteContentButtonStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
