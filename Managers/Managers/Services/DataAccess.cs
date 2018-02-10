@@ -57,6 +57,21 @@ namespace Managers.Services
             return acc;
         }
 
+        public ObservableCollection<Account> GetAccount()
+        {
+            ObservableCollection<Account> acc = new ObservableCollection<Account>();
+
+            var Query =  from a in _Context.Accounts
+                         select a;
+                         
+            foreach (var item in Query)
+            {
+                acc.Add(item);
+            }
+
+            return acc;
+        }
+
         public void UpdateAccount(Account a)
         {
             _Context.Entry(a).State = System.Data.Entity.EntityState.Modified;
@@ -147,6 +162,33 @@ namespace Managers.Services
         {
             _Context.Entry(i).State = System.Data.Entity.EntityState.Modified;
             _Context.SaveChanges();
+        }
+
+        public ObservableCollection<IncomeCategory> GetIncomeCategories()
+        {
+            ObservableCollection<IncomeCategory> inc = new ObservableCollection<IncomeCategory>();
+            var Query = from i in _Context.IncomeCategories
+                        select i;
+            foreach (var item in Query)
+            {
+                inc.Add(item);
+            }
+            return inc;
+        }
+
+        public void AddCategory(IncomeCategory i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCategory(IncomeCategory i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCategory(IncomeCategory i)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

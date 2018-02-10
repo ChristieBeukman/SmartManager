@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Managers.Views.Income"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="450">
-    <Border Padding="20" Width="400"
+    <Border Padding="20" Width="450"
             >
         <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -42,7 +42,7 @@
                            FontSize="20" 
                            HorizontalAlignment="Center" />
                 <Border Grid.Row="1">
-                    <Grid>
+                    <Grid Margin="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="41*"/>
                             <ColumnDefinition Width="43*"/>
@@ -116,8 +116,8 @@
                                   Foreground="White"
                                     FontFamily="Copperplate Gothic Light" 
                                   FontSize="10"
-                                  ItemsSource="{Binding incomeTransactionViewModel.Accounts, Source={StaticResource Locator}}"
-                                  SelectedItem="{Binding incomeTransactionViewModel.SelectedAccount ,Source={StaticResource Locator}}" Margin="27,8,28,9">
+                                  ItemsSource="{Binding addIncomeViewModel.Accounts, Source={StaticResource Locator}}"
+                                  SelectedItem="{Binding addIncomeViewModel.SelectedAccount ,Source={StaticResource Locator}}" Margin="15,0,0,0">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -128,7 +128,7 @@
                                         <TextBlock Grid.Column="0"
                                 Text="{Binding Name}" />
                                         <TextBlock Grid.Column="1"
-                                Text="{Binding AccountNum}" />
+                                Text="{Binding Balance,StringFormat=C,ConverterCulture=en-ZA}" />
                                     </Grid>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
@@ -138,9 +138,10 @@
                                 Foreground="White"
                                  VerticalContentAlignment="Center"
                                  Height="24"
+                                 Text="{Binding addIncomeViewModel.SelectedAccount.Balance,StringFormat=C,ConverterCulture=en-ZA,Source={StaticResource Locator}}"
                                 FontFamily="Copperplate Gothic Light" 
-                                 Text="{Binding incomeTransactionViewModel.SelectedAccount.Balance,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
-                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="36,8,36,9" />
+                                IsReadOnly="True"
+                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="15,8,28,9" />
 
                         <DatePicker Grid.Column="1"
                                     Grid.Row="2"
@@ -148,7 +149,7 @@
                                     Style="{DynamicResource DatePickerStyle}" 
                                      SelectedDate="{Binding incomeTransactionViewModel.IncTrans.Date,Source={StaticResource Locator}}"
                                     Foreground="White" 
-                                    Margin="36,9,28,8" DisplayDate="{Binding incomeTransactionViewModel.IncTrans.Date, Source={StaticResource Locator}}"
+                                    Margin="15,9,28,8" DisplayDate="{Binding incomeTransactionViewModel.IncTrans.Date, Source={StaticResource Locator}}"
                                     />
                         <!--Amount-->
                         <TextBox Grid.Row="3"       
@@ -157,26 +158,51 @@
                                  Height="24"
                                 FontFamily="Copperplate Gothic Light" 
                                  Text="{Binding incomeTransactionViewModel.IncTrans.Amount,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
-                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="36,8,36,9" />
-                        <ComboBox Grid.Column="1"
-                                  Grid.Row="4"
+                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="15,8,28,9" />
+                        <Grid Grid.Column="1"
+                              Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
                                   Height="24"
-                                  ItemsSource="{Binding incomeTransactionViewModel.Categories,Source={StaticResource Locator}}"
-                                  SelectedItem="{Binding incomeTransactionViewModel.SelectedCategory,Source={StaticResource Locator}}"
-                                  DisplayMemberPath="Name"
+                                  ItemsSource="{Binding addIncomeViewModel.Categories,Source={StaticResource Locator}}"
+                                  SelectedItem="{Binding addIncomeViewModel.SelectedCategory,Source={StaticResource Locator}}"
+                                  DisplayMemberPath="TypeName"
                                   Style="{DynamicResource ComboBoxStyle}"
                                   Foreground="White"
                                     FontFamily="Copperplate Gothic Light" 
                                   FontSize="10"
-                                  SelectedIndex="0" Margin="36,9,36,8"/>
+                                  SelectedIndex="0" Margin="16,8,17,9" />
+                            <Ellipse Grid.Column="1"
+                                     Height="40"
+                                     Width="40"
+                                     Fill="#FF2A2838" 
+                                     StrokeThickness="1">
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="#7FFFFFFF" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                            </Ellipse>
+                            <Button Grid.Column="1"
+                                    Height="30"
+                                    Width="30"
+                                    Background="Black"
+                                    Style="{DynamicResource GlassAddButton}" Margin="1,0,0,1"/>
+                        </Grid>
+
                         <!--Description-->
                         <TextBox Grid.Row="5"       
                                 Grid.Column="1"
                                  Height="24"
                                  Foreground="White"
+                                 Width="170"
                                  Text="{Binding incomeTransactionViewModel.IncTrans.Details ,Source={StaticResource Locator}}"
                                 FontFamily="Copperplate Gothic Light" 
-                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="36,8,36,9" />
+                                Style="{DynamicResource TextBoxStyle}" FontSize="10" />
 
 
                     </Grid>

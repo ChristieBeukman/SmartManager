@@ -17,6 +17,7 @@ namespace Managers.Services
         void UpdateAccount(Account a);
         void DeleteAccount(Account a);
         ObservableCollection<Account_AccountType> GetAccounts();
+        ObservableCollection<Account> GetAccount();
 
         //Income
         ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId);
@@ -25,7 +26,10 @@ namespace Managers.Services
         void DeleteIncomeTransaction(IncomeTransaction i);
 
         //IncomeCategory
-
+        ObservableCollection<IncomeCategory> GetIncomeCategories();
+        void AddCategory(IncomeCategory i);
+        void UpdateCategory(IncomeCategory i);
+        void DeleteCategory(IncomeCategory i);
         //Expense
         ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid);
         void DeleteExoenseTransaction(ExpenseTransaction i);
