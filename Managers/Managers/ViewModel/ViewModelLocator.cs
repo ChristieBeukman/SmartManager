@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Managers.ViewModel.Account;
+using Managers.ViewModel.Income;
 
 namespace Managers.ViewModel
 {
@@ -19,14 +20,12 @@ namespace Managers.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-
-
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountManagementViewModel>();
             SimpleIoc.Default.Register<EditAccountViewModel>();
             SimpleIoc.Default.Register<AddAccountViewModel>();
-
+            SimpleIoc.Default.Register<AddIncomeViewModel>();
+            SimpleIoc.Default.Register<EditIncomeViewModel>();
         }
 
         public MainViewModel Main
@@ -61,6 +60,21 @@ namespace Managers.ViewModel
             }
         }
 
+        public AddIncomeViewModel addIncomeViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddIncomeViewModel>();
+            }
+        }
+
+        public EditIncomeViewModel editIncomeViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditIncomeViewModel>();
+            }
+        }
 
         public static void Cleanup()
         {

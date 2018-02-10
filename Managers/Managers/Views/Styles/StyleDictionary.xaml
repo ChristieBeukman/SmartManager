@@ -22,5 +22,6 @@
         <ResourceDictionary Source="DeleteContentButtonStyle.xaml"/>
         <ResourceDictionary Source="ComboBoxStyle.xaml"/>
         <ResourceDictionary Source="CloseButtonStyle.xaml" />
+        <ResourceDictionary Source="DatePickerStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

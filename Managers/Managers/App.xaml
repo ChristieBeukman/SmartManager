@@ -10,6 +10,8 @@
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vmAcc="clr-namespace:Managers.ViewModel.Account"
              xmlns:viewAcc="clr-namespace:Managers.Views.Accounts"
+             xmlns:vmInc="clr-namespace:Managers.ViewModel.Income"
+             xmlns:ViewInc="clr-namespace:Managers.Views.Income"
              >
   <Application.Resources>
     <ResourceDictionary>
@@ -24,7 +26,16 @@
                 <viewAcc:EditAccountView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vmInc:AddIncomeViewModel}">
+                <ViewInc:AddIncomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vmInc:EditIncomeViewModel}">
+                <ViewInc:EditIncomeView/>
+            </DataTemplate>
+
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/StyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>

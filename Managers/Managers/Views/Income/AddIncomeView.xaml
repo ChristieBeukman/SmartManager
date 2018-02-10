@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="Managers.Views.Income.AddIncomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Managers.Views.Income"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="450">
+    <Border Padding="20" Width="400"
+            >
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="1"/>
+                <GradientStop Color="#19FFFFFF"/>
+                <GradientStop Color="#C63E3E3E" Offset="0.708"/>
+                <GradientStop Color="#C6000000" Offset="0.306"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Border Padding="10" 
+                BorderThickness="2"
+                CornerRadius="15"
+                >
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#7FFFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <!--Title Label-->
+                <Label Grid.Row="0"  
+                           Content="Add Income Transaction" 
+                           Height="35" 
+                           FontWeight="Bold" 
+                           Foreground="White" 
+                           FontFamily="Copperplate Gothic Light" 
+                           FontSize="20" 
+                           HorizontalAlignment="Center" />
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="41*"/>
+                            <ColumnDefinition Width="43*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"  
+                                Grid.Column="0" 
+                                Content="Account" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" Width="87" 
+                               VerticalAlignment="Center" Height="28" Margin="0,6,0,7"/>
+                        <Label Grid.Row="1"  
+                                Grid.Column="0"
+                               Height="24"
+                               VerticalAlignment="Center"
+                                Content="Account Balance" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" Margin="0,9,0,8"/>
+                        <Label Grid.Row="2"  
+                                Grid.Column="0"
+                               Height="24"
+                               VerticalAlignment="Center"
+                                Content="Date" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" Width="51" Margin="0,9,0,8" />
+                        <Label Grid.Row="3"  
+                                Grid.Column="0" 
+                                Content="Income Amount" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Height="28" Margin="0,6,0,7" Width="142"  />
+                        <Label Grid.Row="4"  
+                                Grid.Column="0" 
+                                Content="Category" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Width="94" Height="28" Margin="0,7,0,6" />
+                        <Label Grid.Row="5"  
+                                Grid.Column="0" 
+                                Content="Details" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Width="74" Height="28" Margin="0,6,0,7" />
+
+                        <ComboBox Grid.Column="1"
+                                  Grid.Row="0"
+                                  Height="24"
+                                  Style="{DynamicResource ComboBoxStyle}"
+                                  Foreground="White"
+                                    FontFamily="Copperplate Gothic Light" 
+                                  FontSize="10"
+                                  ItemsSource="{Binding incomeTransactionViewModel.Accounts, Source={StaticResource Locator}}"
+                                  SelectedItem="{Binding incomeTransactionViewModel.SelectedAccount ,Source={StaticResource Locator}}" Margin="27,8,28,9">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                Text="{Binding Name}" />
+                                        <TextBlock Grid.Column="1"
+                                Text="{Binding AccountNum}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Grid.Row="1"       
+                                Grid.Column="1" 
+                                Foreground="White"
+                                 VerticalContentAlignment="Center"
+                                 Height="24"
+                                FontFamily="Copperplate Gothic Light" 
+                                 Text="{Binding incomeTransactionViewModel.SelectedAccount.Balance,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
+                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="36,8,36,9" />
+
+                        <DatePicker Grid.Column="1"
+                                    Grid.Row="2"
+                                    Height="24"
+                                    Style="{DynamicResource DatePickerStyle}" 
+                                     SelectedDate="{Binding incomeTransactionViewModel.IncTrans.Date,Source={StaticResource Locator}}"
+                                    Foreground="White" 
+                                    Margin="36,9,28,8" DisplayDate="{Binding incomeTransactionViewModel.IncTrans.Date, Source={StaticResource Locator}}"
+                                    />
+                        <!--Amount-->
+                        <TextBox Grid.Row="3"       
+                                Grid.Column="1" 
+                                Foreground="White"
+                                 Height="24"
+                                FontFamily="Copperplate Gothic Light" 
+                                 Text="{Binding incomeTransactionViewModel.IncTrans.Amount,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
+                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="36,8,36,9" />
+                        <ComboBox Grid.Column="1"
+                                  Grid.Row="4"
+                                  Height="24"
+                                  ItemsSource="{Binding incomeTransactionViewModel.Categories,Source={StaticResource Locator}}"
+                                  SelectedItem="{Binding incomeTransactionViewModel.SelectedCategory,Source={StaticResource Locator}}"
+                                  DisplayMemberPath="Name"
+                                  Style="{DynamicResource ComboBoxStyle}"
+                                  Foreground="White"
+                                    FontFamily="Copperplate Gothic Light" 
+                                  FontSize="10"
+                                  SelectedIndex="0" Margin="36,9,36,8"/>
+                        <!--Description-->
+                        <TextBox Grid.Row="5"       
+                                Grid.Column="1"
+                                 Height="24"
+                                 Foreground="White"
+                                 Text="{Binding incomeTransactionViewModel.IncTrans.Details ,Source={StaticResource Locator}}"
+                                FontFamily="Copperplate Gothic Light" 
+                                Style="{DynamicResource TextBoxStyle}" FontSize="10" Margin="36,8,36,9" />
+
+
+                    </Grid>
+                </Border>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Grid.Column="0"
+                             Height="45"
+                             Width="45"
+                              Fill="#FF2A2838" 
+                             StrokeThickness="1">
+                        <Ellipse.Stroke>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#7FFFFFFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Stroke>
+
+                    </Ellipse>
+                    <Button Grid.Column="0"
+                            Height="35"
+                            Width="35"
+                            Background="Black"
+                            Command="{Binding incomeTransactionViewModel.AddIncomeTransactionCommand,Source={StaticResource Locator}}"
+                            Style="{DynamicResource GlassSaveButton}"/>
+
+                    <Ellipse Grid.Column="1"
+                             Height="45"
+                             Width="45"
+                              Fill="#FF2A2838" 
+                             StrokeThickness="1">
+                        <Ellipse.Stroke>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#7FFFFFFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Stroke>
+
+                    </Ellipse>
+                    <Button Grid.Column="1"
+                            Height="35"
+                            Width="35"
+                            Background="Black"
+                            Style="{DynamicResource GlassCancelButton}"/>
+
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</UserControl>
