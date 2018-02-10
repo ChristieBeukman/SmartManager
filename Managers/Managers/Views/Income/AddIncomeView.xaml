@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Managers.Views.Income"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="450">
+             d:DesignHeight="450
+             " d:DesignWidth="450">
     <Border Padding="20" Width="450"
             >
         <Border.Background>
@@ -48,6 +49,7 @@
                             <ColumnDefinition Width="43*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -108,6 +110,14 @@
                                 FontFamily="Copperplate Gothic Light" 
                                 FontSize="16" 
                                 HorizontalAlignment="Right" VerticalAlignment="Center" Width="74" Height="28" Margin="0,6,0,7" />
+                        <Label Grid.Row="6"  
+                                Grid.Column="0" 
+                                Content="Payment Type" 
+                                FontWeight="Bold" 
+                                Foreground="White" 
+                                FontFamily="Copperplate Gothic Light" 
+                                FontSize="16" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Width="126" Height="28" Margin="0,3,0,4" />
 
                         <ComboBox Grid.Column="1"
                                   Grid.Row="0"
@@ -204,6 +214,17 @@
                                 FontFamily="Copperplate Gothic Light" 
                                 Style="{DynamicResource TextBoxStyle}" FontSize="10" />
 
+                        <ComboBox Grid.Column="1"
+                                  Grid.Row="6"
+                                  Height="24"
+                                  ItemsSource="{Binding addIncomeViewModel.PTypes,Source={StaticResource Locator}}"
+                                  SelectedItem="{Binding addIncomeViewModel.SelectedPaymentType,Source={StaticResource Locator}}"
+                                  DisplayMemberPath="TypeName"
+                                  Style="{DynamicResource ComboBoxStyle}"
+                                  Foreground="White"
+                                    FontFamily="Copperplate Gothic Light" 
+                                  FontSize="10"
+                                  SelectedIndex="0" Margin="16,8,17,9" />
 
                     </Grid>
                 </Border>

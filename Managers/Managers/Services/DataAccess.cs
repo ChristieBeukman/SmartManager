@@ -190,6 +190,19 @@ namespace Managers.Services
         {
             throw new NotImplementedException();
         }
+
+        public ObservableCollection<PaymentType> GetPaymentTypes()
+        {
+            ObservableCollection<PaymentType> type = new ObservableCollection<PaymentType>();
+
+            var Query = from p in _Context.PaymentTypes
+                        select p;
+            foreach (var item in Query)
+            {
+                type.Add(item);
+            }
+            return type;
+        }
         #endregion
 
 

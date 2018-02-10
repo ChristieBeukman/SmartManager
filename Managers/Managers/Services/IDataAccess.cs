@@ -30,6 +30,9 @@ namespace Managers.Services
         void AddCategory(IncomeCategory i);
         void UpdateCategory(IncomeCategory i);
         void DeleteCategory(IncomeCategory i);
+
+        //Payment Type
+        ObservableCollection<PaymentType> GetPaymentTypes();
         //Expense
         ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid);
         void DeleteExoenseTransaction(ExpenseTransaction i);

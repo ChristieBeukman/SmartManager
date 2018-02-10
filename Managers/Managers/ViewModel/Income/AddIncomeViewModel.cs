@@ -30,8 +30,15 @@ namespace Managers.ViewModel.Income
             Categories = new ObservableCollection<IncomeCategory>();
             SelectedCategory = new IncomeCategory();
 
+            PTypes = new ObservableCollection<PaymentType>();
+            SelectedPaymentType = new PaymentType();
+
             GetAccounts();
             GetCategories();
+            GetPaymentTypes();
+
+            IncTransaction = new IncomeTransaction();
+            AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
         }
 
         #region Messaging
@@ -136,6 +143,7 @@ namespace Managers.ViewModel.Income
             }
         }
 
+
         void GetCategories()
         {
             Categories.Clear();
@@ -147,7 +155,78 @@ namespace Managers.ViewModel.Income
 
         #endregion
 
+        #region PaymentTypes
 
+        private ObservableCollection<PaymentType> _PTypes;
+        private PaymentType _SelectedPaymentType;
+
+        public ObservableCollection<PaymentType> PTypes
+        {
+            get
+            {
+                return _PTypes;
+            }
+
+            set
+            {
+                _PTypes = value;
+                RaisePropertyChanged("PTypes");
+            }
+        }
+
+        public PaymentType SelectedPaymentType
+        {
+            get
+            {
+                return _SelectedPaymentType;
+            }
+
+            set
+            {
+                _SelectedPaymentType = value;
+                RaisePropertyChanged("SelectedPaymentType");
+            }
+        }
+
+        void GetPaymentTypes()
+        {
+            PTypes.Clear();
+            foreach (var item in _ServiceProxy.GetPaymentTypes())
+            {
+                PTypes.Add(item);
+            }
+
+        }
+
+        #endregion
+
+        #region Add
+
+        private IncomeTransaction _IncTransaction;
+
+        public IncomeTransaction IncTransaction
+        {
+            get
+            {
+                return _IncTransaction;
+            }
+
+            set
+            {
+                _IncTransaction = value;
+                RaisePropertyChanged("IncTransaction");
+            }
+        }
+
+        public RelayCommand AddIncomeCommand { get; set; }
+
+
+        void ExecuteAddIncome()
+        {
+            IncTransaction.AccountId = SelectedAccount.AccountId;
+            IncTransaction.IncomeCategoryId = SelectedCategory.IncomeCategoryId;
+        }
+        #endregion
 
     }
 }
