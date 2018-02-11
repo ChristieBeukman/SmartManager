@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -12,6 +13,8 @@ using Managers.Model;
 using Managers.Model.ModelViews;
 using Managers.Services;
 using Managers.Tools;
+using Managers.Views.Income;
+using Managers.Services.Dialog;
 
 namespace Managers.ViewModel.Income
 {
@@ -22,6 +25,7 @@ namespace Managers.ViewModel.Income
         public AddIncomeViewModel()
         {
             _ServiceProxy = new DataAccess();
+            toggle = new ToggleControl();
 
             MessengerInstance.Register<GenericMessage<string>>(this, ReceiveUpdateMessage);
 
@@ -40,7 +44,64 @@ namespace Managers.ViewModel.Income
 
             IncTransaction = new IncomeTransaction();
             AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
+            ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
+            ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
+            dateTime = new DateTime();
+            dateTime = DateTime.Now;
+            DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
+           
         }
+
+        #region Toggle
+        ToggleControl toggle;
+
+        private bool _ToggleAmount = true;
+        private bool _ToggleDetails = true;
+
+        public bool ToggleAmount
+        {
+            get
+            {
+                return _ToggleAmount;
+            }
+
+            set
+            {
+                _ToggleAmount = value;
+                RaisePropertyChanged("ToggleAmount");
+            }
+        }
+
+        public bool ToggleDetails
+        {
+            get
+            {
+                return _ToggleDetails;
+            }
+
+            set
+            {
+                _ToggleDetails = value;
+                RaisePropertyChanged("ToggleDetails");
+            }
+        }
+
+        public RelayCommand ToggleAmmountCommand { get; set; }
+        public RelayCommand ToggleDetailsCommand { get; set; }
+
+        void ExecuteToggleAmount()
+        {
+            ToggleAmount = toggle.ReadOnly(ToggleAmount);
+            ToggleDetails = true;
+        }
+
+        void ExecuteToggleDetails()
+        {
+            ToggleDetails = toggle.ReadOnly(ToggleDetails);
+            ToggleAmount = true;
+        }
+
+        #endregion
 
         #region Messaging
 
@@ -51,10 +112,9 @@ namespace Managers.ViewModel.Income
             {
                 GetAccounts();
             }
-            if (message == "Delete")
+            if (message == "GetIncomeCategories")
             {
-                //DeleteVisible = true;
-                //SaveVisible = false;
+                GetCategories();
             }
             if (message == "Save")
             {
@@ -202,6 +262,7 @@ namespace Managers.ViewModel.Income
         #endregion
 
         #region Add
+        public DateTime dateTime;
 
         private IncomeTransaction _IncTransaction;
 
@@ -232,6 +293,7 @@ namespace Managers.ViewModel.Income
                 SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
                 _ServiceProxy.UpdateAccount(SelectedAccount);
                 _ServiceProxy.AddIncome(IncTransaction);
+                GetAccounts();
                 MessageBox.Show("Added");
             }
             else
@@ -241,6 +303,29 @@ namespace Managers.ViewModel.Income
             
         }
         #endregion
+
+        public ICommand DisplayAddCategoryCommand{ get; }
+
+        private void ExecuteDiaplayAddCategory()
+        {
+            var viewModel = new AddCategoryViewModel();
+            var view = new AddIncomeCategpry { DataContext = viewModel };
+
+            bool? result = view.ShowDialog();
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+
+                }
+                else
+                {
+                    //Cancelled
+                }
+            }
+        }
+
 
     }
 }
