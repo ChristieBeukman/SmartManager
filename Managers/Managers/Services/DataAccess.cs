@@ -57,6 +57,21 @@ namespace Managers.Services
             return acc;
         }
 
+        public ObservableCollection<Account> GetAccount()
+        {
+            ObservableCollection<Account> acc = new ObservableCollection<Account>();
+
+            var Query =  from a in _Context.Accounts
+                         select a;
+                         
+            foreach (var item in Query)
+            {
+                acc.Add(item);
+            }
+
+            return acc;
+        }
+
         public void UpdateAccount(Account a)
         {
             _Context.Entry(a).State = System.Data.Entity.EntityState.Modified;
@@ -65,6 +80,7 @@ namespace Managers.Services
 
         #endregion
 
+        #region AccountType
         public ObservableCollection<AccountType> GetAccountTypes()
         {
             ObservableCollection<AccountType> acc = new ObservableCollection<AccountType>();
@@ -79,13 +95,17 @@ namespace Managers.Services
             return acc;
         }
 
+        #endregion
+
+        #region Expense
+
         public ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId)
         {
             ObservableCollection<IncomeTransaction> inc = new ObservableCollection<IncomeTransaction>();
 
             var Query = from i in _Context.IncomeTransactions
-                         where i.AccountId == accountId
-                         select i;
+                        where i.AccountId == accountId
+                        select i;
 
             foreach (var item in Query)
             {
@@ -93,6 +113,19 @@ namespace Managers.Services
             }
             return inc;
         }
+
+        public void DeleteExoenseTransaction(ExpenseTransaction i)
+        {
+            if (i != null)
+            {
+                _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
+                _Context.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region Income
 
         public ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid)
         {
@@ -116,16 +149,64 @@ namespace Managers.Services
                 _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
                 _Context.SaveChanges();
             }
-            
+
         }
 
-        public void DeleteExoenseTransaction(ExpenseTransaction i)
+        public void AddIncome(IncomeTransaction i)
         {
-            if (i != null)
-            {
-                _Context.Entry(i).State = System.Data.Entity.EntityState.Deleted;
-                _Context.SaveChanges();
-            }
+            _Context.IncomeTransactions.Add(i);
+            _Context.SaveChanges();
         }
+
+        public void UpdateIncome(IncomeTransaction i)
+        {
+            _Context.Entry(i).State = System.Data.Entity.EntityState.Modified;
+            _Context.SaveChanges();
+        }
+
+        public ObservableCollection<IncomeCategory> GetIncomeCategories()
+        {
+            ObservableCollection<IncomeCategory> inc = new ObservableCollection<IncomeCategory>();
+            var Query = from i in _Context.IncomeCategories
+                        select i;
+            foreach (var item in Query)
+            {
+                inc.Add(item);
+            }
+            return inc;
+        }
+
+        public void AddIncomeCategory(IncomeCategory i)
+        {
+            _Context.IncomeCategories.Add(i);
+            _Context.SaveChanges();
+        }
+
+        public void UpdateCategory(IncomeCategory i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCategory(IncomeCategory i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<PaymentType> GetPaymentTypes()
+        {
+            ObservableCollection<PaymentType> type = new ObservableCollection<PaymentType>();
+
+            var Query = from p in _Context.PaymentTypes
+                        select p;
+            foreach (var item in Query)
+            {
+                type.Add(item);
+            }
+            return type;
+        }
+        #endregion
+
+
+
     }
 }

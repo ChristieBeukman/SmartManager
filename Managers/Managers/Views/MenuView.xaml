@@ -18,10 +18,9 @@
         <MenuItem Header="Accounts"
                    Foreground="White"
                   FontSize="16">
-            <MenuItem Header="Management"
+            <MenuItem Header="_Management"
                       FontSize="14" 
                       Foreground="White" 
-                      Template="{DynamicResource MenuItemControlTemplate}"
                       FontFamily="Trajan Pro" 
                       Background="#7F000000"
                       Command="{Binding Main.ViewAccountManagementCommand,Source={StaticResource Locator}}"
@@ -34,23 +33,57 @@
             </MenuItem>
 
         </MenuItem>
-        <MenuItem Header="Transactions"
-                  FontSize="16"
-                  Command="{Binding FramCostMainViewCommand}">
-
+        <MenuItem Header="_Transactions"
+                  FontSize="16">
             <MenuItem Header="Income"
                       FontSize="14" 
                       Foreground="White" 
-                      Template="{DynamicResource MenuItemControlTemplate}"
                       FontFamily="Trajan Pro" 
                       Background="#7F000000"
-                      Command="{Binding Main.ViewIncomeTransactionCommand,Source={StaticResource Locator}}"
                       >
                 <MenuItem.Effect>
                     <DropShadowEffect BlurRadius="0"
                                       ShadowDepth="1"
                                       Color="Black"/>
                 </MenuItem.Effect>
+                <MenuItem Header="_Add Income"
+                          FontSize="14"
+                          Foreground="White"
+                          FontFamily="Trajan Pro" 
+                          Background="#7F000000"
+                          Command="{Binding Main.ViewAddIncomeCommand,Source={StaticResource Locator}}"
+                      >
+                    <MenuItem.Effect>
+                        <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="1"
+                                      Color="Black"/>
+                    </MenuItem.Effect>
+                </MenuItem>
+                <MenuItem Header="_Edit Income"
+                          FontSize="14"
+                          Foreground="White"
+                          FontFamily="Trajan Pro" 
+                          Background="#7F000000"
+                          Command="{Binding Main.ViewEditIncomeCommand,Source={StaticResource Locator}}"
+                      >
+                    <MenuItem.Effect>
+                        <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="1"
+                                      Color="Black"/>
+                    </MenuItem.Effect>
+                </MenuItem>
+                <MenuItem Header="_Delete Income"
+                          FontSize="14"
+                          Foreground="White"
+                            FontFamily="Trajan Pro" 
+                      Background="#7F000000"
+                      >
+                    <MenuItem.Effect>
+                        <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="1"
+                                      Color="Black"/>
+                    </MenuItem.Effect>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Expense"
                       FontSize="14" 
