@@ -35,7 +35,7 @@
         </MenuItem>
         <MenuItem Header="_Transactions"
                   FontSize="16">
-            <MenuItem Header="Income"
+            <MenuItem Header="_Income"
                       FontSize="14" 
                       Foreground="White" 
                       FontFamily="Trajan Pro" 
@@ -85,20 +85,57 @@
                     </MenuItem.Effect>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Expense"
+            <MenuItem Header="_Expense"
                       FontSize="14" 
                       Foreground="White" 
-                      Template="{DynamicResource MenuItemControlTemplate}"
                       FontFamily="Trajan Pro" 
                       Background="#7F000000"
-                      Command="{Binding Main.ViewExpenseTransactionCommand ,Source={StaticResource Locator}}"
                       >
                 <MenuItem.Effect>
                     <DropShadowEffect BlurRadius="0"
                                       ShadowDepth="1"
                                       Color="Black"/>
                 </MenuItem.Effect>
+                <MenuItem Header="_Add Expense"
+                          FontSize="14"
+                          Foreground="White"
+                          FontFamily="Trajan Pro" 
+                          Background="#7F000000"
+                          Command="{Binding Main.ViewAddExpenseCommand,Source={StaticResource Locator}}"
+                      >
+                    <MenuItem.Effect>
+                        <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="1"
+                                      Color="Black"/>
+                    </MenuItem.Effect>
+                </MenuItem>
+                <MenuItem Header="_Edit Expense"
+                          FontSize="14"
+                          Foreground="White"
+                          FontFamily="Trajan Pro" 
+                          Background="#7F000000"
+                          Command="{Binding Main.ViewEditIncomeCommand,Source={StaticResource Locator}}"
+                      >
+                    <MenuItem.Effect>
+                        <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="1"
+                                      Color="Black"/>
+                    </MenuItem.Effect>
+                </MenuItem>
+                <MenuItem Header="_Delete Expense"
+                          FontSize="14"
+                          Foreground="White"
+                            FontFamily="Trajan Pro" 
+                      Background="#7F000000"
+                      >
+                    <MenuItem.Effect>
+                        <DropShadowEffect BlurRadius="0"
+                                      ShadowDepth="1"
+                                      Color="Black"/>
+                    </MenuItem.Effect>
+                </MenuItem>
             </MenuItem>
+
             <MenuItem Header="Balance"
                       FontSize="14" 
                       Foreground="White" 

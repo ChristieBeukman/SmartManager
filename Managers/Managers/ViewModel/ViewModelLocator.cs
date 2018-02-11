@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Managers.ViewModel.Account;
 using Managers.ViewModel.Income;
+using Managers.ViewModel.Expense;
 
 namespace Managers.ViewModel
 {
@@ -27,6 +28,7 @@ namespace Managers.ViewModel
             SimpleIoc.Default.Register<AddIncomeViewModel>();
             SimpleIoc.Default.Register<EditIncomeViewModel>();
             SimpleIoc.Default.Register<AddCategoryViewModel>();
+            SimpleIoc.Default.Register<AddExpenseViewModel>();
         }
 
         public MainViewModel Main
@@ -77,10 +79,18 @@ namespace Managers.ViewModel
             }
         }
 
-        public AddCategoryViewModel addCategoryViewModel        {
+        public AddCategoryViewModel addCategoryViewModel{
             get
             {
                 return ServiceLocator.Current.GetInstance<AddCategoryViewModel>();
+            }
+        }
+
+        public AddExpenseViewModel addExpenseViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddExpenseViewModel>();
             }
         }
 
