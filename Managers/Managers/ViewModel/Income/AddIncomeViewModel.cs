@@ -22,6 +22,7 @@ namespace Managers.ViewModel.Income
         public AddIncomeViewModel()
         {
             _ServiceProxy = new DataAccess();
+            toggle = new ToggleControl();
 
             MessengerInstance.Register<GenericMessage<string>>(this, ReceiveUpdateMessage);
 
@@ -40,7 +41,62 @@ namespace Managers.ViewModel.Income
 
             IncTransaction = new IncomeTransaction();
             AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
+            ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
+            ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
+            dateTime = new DateTime();
+            dateTime = DateTime.Now;
         }
+
+        #region Toggle
+        ToggleControl toggle;
+
+        private bool _ToggleAmount = true;
+        private bool _ToggleDetails = true;
+
+        public bool ToggleAmount
+        {
+            get
+            {
+                return _ToggleAmount;
+            }
+
+            set
+            {
+                _ToggleAmount = value;
+                RaisePropertyChanged("ToggleAmount");
+            }
+        }
+
+        public bool ToggleDetails
+        {
+            get
+            {
+                return _ToggleDetails;
+            }
+
+            set
+            {
+                _ToggleDetails = value;
+                RaisePropertyChanged("ToggleDetails");
+            }
+        }
+
+        public RelayCommand ToggleAmmountCommand { get; set; }
+        public RelayCommand ToggleDetailsCommand { get; set; }
+
+        void ExecuteToggleAmount()
+        {
+            ToggleAmount = toggle.ReadOnly(ToggleAmount);
+            ToggleDetails = true;
+        }
+
+        void ExecuteToggleDetails()
+        {
+            ToggleDetails = toggle.ReadOnly(ToggleDetails);
+            ToggleAmount = true;
+        }
+
+        #endregion
 
         #region Messaging
 
@@ -202,6 +258,7 @@ namespace Managers.ViewModel.Income
         #endregion
 
         #region Add
+        public DateTime dateTime;
 
         private IncomeTransaction _IncTransaction;
 
