@@ -13,8 +13,9 @@ using Managers.Model;
 using Managers.Model.ModelViews;
 using Managers.Services;
 using Managers.Tools;
-using Managers.Views.Income;
+using Managers.Views.Expense;
 using Managers.Services.Dialog;
+using Managers.ViewModel.Expense;
 
 namespace Managers.ViewModel.Expense
 {
@@ -41,6 +42,8 @@ namespace Managers.ViewModel.Expense
             GetAccounts();
             GetCategories();
             GetPaymentTypes();
+
+            DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
         }
 
         #region Toggle
@@ -252,6 +255,27 @@ namespace Managers.ViewModel.Expense
 
         #endregion
 
+        public ICommand DisplayAddCategoryCommand { get; }
+
+        private void ExecuteDiaplayAddCategory()
+        {
+            var viewModel = new AddExpenseCategoryViewModel();
+            var view = new AddExpenseCategoryView { DataContext = viewModel };
+
+            bool? result = view.ShowDialog();
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+
+                }
+                else
+                {
+                    //Cancelled
+                }
+            }
+        }
 
     }
 }
