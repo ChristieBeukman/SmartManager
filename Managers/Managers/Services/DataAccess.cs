@@ -176,9 +176,10 @@ namespace Managers.Services
             return inc;
         }
 
-        public void AddCategory(IncomeCategory i)
+        public void AddIncomeCategory(IncomeCategory i)
         {
-            throw new NotImplementedException();
+            _Context.IncomeCategories.Add(i);
+            _Context.SaveChanges();
         }
 
         public void UpdateCategory(IncomeCategory i)
