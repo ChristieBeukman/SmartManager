@@ -49,6 +49,7 @@ namespace Managers.ViewModel.Income
             dateTime = new DateTime();
             dateTime = DateTime.Now;
             DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
+           
         }
 
         #region Toggle
@@ -111,10 +112,9 @@ namespace Managers.ViewModel.Income
             {
                 GetAccounts();
             }
-            if (message == "Delete")
+            if (message == "GetIncomeCategories")
             {
-                //DeleteVisible = true;
-                //SaveVisible = false;
+                GetCategories();
             }
             if (message == "Save")
             {
@@ -293,6 +293,7 @@ namespace Managers.ViewModel.Income
                 SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
                 _ServiceProxy.UpdateAccount(SelectedAccount);
                 _ServiceProxy.AddIncome(IncTransaction);
+                GetAccounts();
                 MessageBox.Show("Added");
             }
             else

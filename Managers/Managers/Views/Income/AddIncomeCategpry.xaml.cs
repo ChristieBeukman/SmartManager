@@ -24,5 +24,27 @@ namespace Managers.Views.Income
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Add Another Category>", "Added", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            switch (result)
+            {
+                case MessageBoxResult.None:
+                    break;
+                case MessageBoxResult.OK:
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+                case MessageBoxResult.Yes:
+                    break;
+                case MessageBoxResult.No:
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
+            
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Managers.Services
 
         //IncomeCategory
         ObservableCollection<IncomeCategory> GetIncomeCategories();
-        void AddCategory(IncomeCategory i);
+        void AddIncomeCategory(IncomeCategory i);
         void UpdateCategory(IncomeCategory i);
         void DeleteCategory(IncomeCategory i);
 

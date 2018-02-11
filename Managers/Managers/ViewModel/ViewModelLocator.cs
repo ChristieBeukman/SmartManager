@@ -26,6 +26,7 @@ namespace Managers.ViewModel
             SimpleIoc.Default.Register<AddAccountViewModel>();
             SimpleIoc.Default.Register<AddIncomeViewModel>();
             SimpleIoc.Default.Register<EditIncomeViewModel>();
+            SimpleIoc.Default.Register<AddCategoryViewModel>();
         }
 
         public MainViewModel Main
@@ -73,6 +74,13 @@ namespace Managers.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<EditIncomeViewModel>();
+            }
+        }
+
+        public AddCategoryViewModel addCategoryViewModel        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddCategoryViewModel>();
             }
         }
 
