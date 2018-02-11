@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -12,6 +13,8 @@ using Managers.Model;
 using Managers.Model.ModelViews;
 using Managers.Services;
 using Managers.Tools;
+using Managers.Views.Income;
+using Managers.Services.Dialog;
 
 namespace Managers.ViewModel.Income
 {
@@ -45,6 +48,7 @@ namespace Managers.ViewModel.Income
             ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
             dateTime = new DateTime();
             dateTime = DateTime.Now;
+            DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
         }
 
         #region Toggle
@@ -298,6 +302,29 @@ namespace Managers.ViewModel.Income
             
         }
         #endregion
+
+        public ICommand DisplayAddCategoryCommand{ get; }
+
+        private void ExecuteDiaplayAddCategory()
+        {
+            var viewModel = new AddCategoryViewModel();
+            var view = new AddIncomeCategpry { DataContext = viewModel };
+
+            bool? result = view.ShowDialog();
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+
+                }
+                else
+                {
+                    //Cancelled
+                }
+            }
+        }
+
 
     }
 }

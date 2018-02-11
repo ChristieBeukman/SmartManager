@@ -148,6 +148,12 @@
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\DataAccess.cs" />
+    <Compile Include="Services\Dialog\ActionCommand.cs" />
+    <Compile Include="Services\Dialog\DialogCloseRequestedArgs.cs" />
+    <Compile Include="Services\Dialog\DialogService.cs" />
+    <Compile Include="Services\Dialog\IDailogRequestClose.cs" />
+    <Compile Include="Services\Dialog\IDailogService.cs" />
+    <Compile Include="Services\Dialog\IDialog.cs" />
     <Compile Include="Services\IDataAccess.cs" />
     <Compile Include="Tools\BoolVisibleInvisibleConverter.cs" />
     <Compile Include="Tools\EnterKeyHelper.cs" />
@@ -155,6 +161,7 @@
     <Compile Include="ViewModel\Account\AccountManagementViewModel.cs" />
     <Compile Include="ViewModel\Account\AddAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
+    <Compile Include="ViewModel\Income\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\Income\AddIncomeViewModel.cs" />
     <Compile Include="ViewModel\Income\EditIncomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -167,6 +174,9 @@
     </Compile>
     <Compile Include="Views\Accounts\EditAccountView.xaml.cs">
       <DependentUpon>EditAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Income\AddIncomeCategpry.xaml.cs">
+      <DependentUpon>AddIncomeCategpry.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Income\AddIncomeView.xaml.cs">
       <DependentUpon>AddIncomeView.xaml</DependentUpon>
@@ -198,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Accounts\EditAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Income\AddIncomeCategpry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
