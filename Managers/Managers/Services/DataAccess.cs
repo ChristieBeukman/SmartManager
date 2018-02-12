@@ -123,6 +123,42 @@ namespace Managers.Services
             }
         }
 
+        public ObservableCollection<ExpenseCategory> GetExpenseCategories()
+        {
+            ObservableCollection<ExpenseCategory> exp = new ObservableCollection<ExpenseCategory>();
+
+            var Query = from i in _Context.ExpenseCategories
+                        select i;
+
+            foreach (var item in Query)
+            {
+                exp.Add(item);
+            }
+            return exp;
+        }
+
+        public void AddExpenseCategory(ExpenseCategory i)
+        {
+            _Context.ExpenseCategories.Add(i);
+            _Context.SaveChanges();
+        }
+
+        public void UpdateExpenseCategory(ExpenseCategory i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteExpenseCategory(ExpenseCategory i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddExpenseTransaction(ExpenseTransaction i)
+        {
+            _Context.ExpenseTransactions.Add(i);
+            _Context.SaveChanges();
+        }
+
         #endregion
 
         #region Income
@@ -204,6 +240,9 @@ namespace Managers.Services
             }
             return type;
         }
+
+
+
         #endregion
 
 

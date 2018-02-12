@@ -13,16 +13,17 @@ using Managers.Model;
 using Managers.Model.ModelViews;
 using Managers.Services;
 using Managers.Tools;
-using Managers.Views.Income;
+using Managers.Views.Expense;
 using Managers.Services.Dialog;
+using Managers.ViewModel.Expense;
 
-namespace Managers.ViewModel.Income
+namespace Managers.ViewModel.Expense
 {
-    public class AddIncomeViewModel : ViewModelBase
+    public class AddExpenseViewModel : ViewModelBase
     {
         IDataAccess _ServiceProxy;
 
-        public AddIncomeViewModel()
+        public AddExpenseViewModel()
         {
             _ServiceProxy = new DataAccess();
             toggle = new ToggleControl();
@@ -32,8 +33,8 @@ namespace Managers.ViewModel.Income
             Accounts = new ObservableCollection<Model.Account>();
             SelectedAccount = new Model.Account();
 
-            Categories = new ObservableCollection<IncomeCategory>();
-            SelectedCategory = new IncomeCategory();
+            Categories = new ObservableCollection<ExpenseCategory>();
+            SelectedCategory = new ExpenseCategory();
 
             PTypes = new ObservableCollection<PaymentType>();
             SelectedPaymentType = new PaymentType();
@@ -42,17 +43,18 @@ namespace Managers.ViewModel.Income
             GetCategories();
             GetPaymentTypes();
 
-            IncTransaction = new IncomeTransaction();
+            ExpenseTrans = new ExpenseTransaction();
             int yyyy = DateTime.Now.Year;
             int dd = DateTime.Now.Day;
             int mm = DateTime.Now.Month;
             Present = new DateTime(yyyy, mm, dd);
-            IncTransaction.Date = DateTime.Now;
-            AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
+            ExpenseTrans.Date = DateTime.Now.Date;
+            
+
+            DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
+            AddExpenseTransactionCommand = new RelayCommand(ExecuteAddExpenseTransaction);
             ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
             ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
-            DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
-           
         }
 
         #region Toggle
@@ -115,7 +117,7 @@ namespace Managers.ViewModel.Income
             {
                 GetAccounts();
             }
-            if (message == "GetIncomeCategories")
+            if (message == "GetExpenseCategories")
             {
                 GetCategories();
             }
@@ -176,10 +178,10 @@ namespace Managers.ViewModel.Income
 
         #region Categories
 
-        private ObservableCollection<IncomeCategory> _Categories;
-        private IncomeCategory _SelectedCategory;
+        private ObservableCollection<ExpenseCategory> _Categories;
+        private ExpenseCategory _SelectedCategory;
 
-        public ObservableCollection<IncomeCategory> Categories
+        public ObservableCollection<ExpenseCategory> Categories
         {
             get
             {
@@ -193,7 +195,7 @@ namespace Managers.ViewModel.Income
             }
         }
 
-        public IncomeCategory SelectedCategory
+        public ExpenseCategory SelectedCategory
         {
             get
             {
@@ -206,12 +208,32 @@ namespace Managers.ViewModel.Income
                 RaisePropertyChanged("SelectedCategory");
             }
         }
+        public ICommand DisplayAddCategoryCommand { get; }
 
+        private void ExecuteDiaplayAddCategory()
+        {
+            var viewModel = new AddExpenseCategoryViewModel();
+            var view = new AddExpenseCategoryView { DataContext = viewModel };
+
+            bool? result = view.ShowDialog();
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+
+                }
+                else
+                {
+                    //Cancelled
+                }
+            }
+        }
 
         void GetCategories()
         {
             Categories.Clear();
-            foreach (var item in _ServiceProxy.GetIncomeCategories())
+            foreach (var item in _ServiceProxy.GetExpenseCategories())
             {
                 Categories.Add(item);
             }
@@ -252,6 +274,7 @@ namespace Managers.ViewModel.Income
             }
         }
 
+
         void GetPaymentTypes()
         {
             PTypes.Clear();
@@ -264,27 +287,27 @@ namespace Managers.ViewModel.Income
 
         #endregion
 
-        #region Add
+        #region AddExpense
 
-        private IncomeTransaction _IncTransaction;
+        private ExpenseTransaction _ExpenseTrans;
 
-        public IncomeTransaction IncTransaction
+        public ExpenseTransaction ExpenseTrans
         {
             get
             {
-                return _IncTransaction;
+                return _ExpenseTrans;
             }
 
             set
             {
-                _IncTransaction = value;
-                RaisePropertyChanged("IncTransaction");
+                _ExpenseTrans = value;
+                RaisePropertyChanged("ExpenseTrans");
             }
         }
 
-        public RelayCommand AddIncomeCommand { get; set; }
-
         private DateTime _Present;
+
+        public RelayCommand AddExpenseTransactionCommand { get; set; }
 
         public DateTime Present
         {
@@ -300,49 +323,27 @@ namespace Managers.ViewModel.Income
             }
         }
 
-        void ExecuteAddIncome()
+        void ExecuteAddExpenseTransaction()
         {
-            if (IncTransaction.Date >= DateTime.Now)
-            {
-                IncTransaction.AccountId = SelectedAccount.AccountId;
-                IncTransaction.IncomeCategoryId = SelectedCategory.IncomeCategoryId;
-                IncTransaction.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
-                SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
-                _ServiceProxy.UpdateAccount(SelectedAccount);
-                _ServiceProxy.AddIncome(IncTransaction);
-                GetAccounts();
-                MessageBox.Show("Added");
-            }
-            else
-            {
-                MessageBox.Show("Date cannot be before present");
-            }
             
-        }
-        #endregion
-
-        public ICommand DisplayAddCategoryCommand{ get; }
-
-        private void ExecuteDiaplayAddCategory()
-        {
-            var viewModel = new AddCategoryViewModel();
-            var view = new AddIncomeCategpry { DataContext = viewModel };
-
-            bool? result = view.ShowDialog();
-
-            if (result.HasValue)
-            {
-                if (result.Value)
+                if (ExpenseTrans.Amount < SelectedAccount.Balance)
                 {
-
+                    ExpenseTrans.AccountId = SelectedAccount.AccountId;
+                    ExpenseTrans.ExpenseCategoryId = SelectedCategory.ExpenseCategoryId;
+                    ExpenseTrans.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
+                    SelectedAccount.Balance = SelectedAccount.Balance - ExpenseTrans.Amount;
+                    _ServiceProxy.UpdateAccount(SelectedAccount);
+                    _ServiceProxy.AddExpenseTransaction(ExpenseTrans);
+                    GetAccounts();
+                    MessageBox.Show("Added");
                 }
                 else
                 {
-                    //Cancelled
+                    MessageBox.Show("Amount cannot be more than account balance");
                 }
-            }
         }
 
+        #endregion
 
     }
 }
