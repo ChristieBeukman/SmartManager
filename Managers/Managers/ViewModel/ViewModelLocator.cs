@@ -29,6 +29,7 @@ namespace Managers.ViewModel
             SimpleIoc.Default.Register<EditIncomeViewModel>();
             SimpleIoc.Default.Register<AddCategoryViewModel>();
             SimpleIoc.Default.Register<AddExpenseViewModel>();
+            SimpleIoc.Default.Register<AddExpenseCategoryViewModel>();
         }
 
         public MainViewModel Main
@@ -93,6 +94,14 @@ namespace Managers.ViewModel
                 return ServiceLocator.Current.GetInstance<AddExpenseViewModel>();
             }
         }
+
+        public AddExpenseCategoryViewModel addExpenseCategoryViewModel        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddExpenseCategoryViewModel>();
+            }
+        }
+
 
         public static void Cleanup()
         {

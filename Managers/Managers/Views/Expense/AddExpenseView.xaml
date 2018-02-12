@@ -193,7 +193,7 @@
                                   Height="24"
                                   ItemsSource="{Binding addExpenseViewModel.Categories,Source={StaticResource Locator}}"
                                   SelectedItem="{Binding addExpenseViewModel.SelectedCategory,Source={StaticResource Locator}}"
-                                  DisplayMemberPath="TypeName"
+                                  DisplayMemberPath="Name"
                                   Style="{DynamicResource ComboBoxStyle}"
                                   Foreground="White"
                                     FontFamily="Copperplate Gothic Light" 
@@ -216,7 +216,7 @@
                                     Width="30"
                                     Background="Black"
                                     Style="{DynamicResource GlassAddButton}" Margin="1,0,0,1"
-                                    Command="{Binding addIncomeViewModel.DisplayAddCategoryCommand,Source={StaticResource Locator}}"/>
+                                    Command="{Binding addExpenseViewModel.DisplayAddCategoryCommand,Source={StaticResource Locator}}"/>
                         </Grid>
 
                         <!--Description-->

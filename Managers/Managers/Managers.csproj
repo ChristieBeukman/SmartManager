@@ -161,6 +161,7 @@
     <Compile Include="ViewModel\Account\AccountManagementViewModel.cs" />
     <Compile Include="ViewModel\Account\AddAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
+    <Compile Include="ViewModel\Expense\AddExpenseCategoryViewModel.cs" />
     <Compile Include="ViewModel\Expense\AddExpenseViewModel.cs" />
     <Compile Include="ViewModel\Income\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\Income\AddIncomeViewModel.cs" />
@@ -175,6 +176,9 @@
     </Compile>
     <Compile Include="Views\Accounts\EditAccountView.xaml.cs">
       <DependentUpon>EditAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Expense\AddExpenseCategoryView.xaml.cs">
+      <DependentUpon>AddExpenseCategoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Expense\AddExpenseView.xaml.cs">
       <DependentUpon>AddExpenseView.xaml</DependentUpon>
@@ -212,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Accounts\EditAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Expense\AddExpenseCategoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

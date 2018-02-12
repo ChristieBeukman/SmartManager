@@ -13,8 +13,9 @@ using Managers.Model;
 using Managers.Model.ModelViews;
 using Managers.Services;
 using Managers.Tools;
-using Managers.Views.Income;
+using Managers.Views.Expense;
 using Managers.Services.Dialog;
+using Managers.ViewModel.Expense;
 
 namespace Managers.ViewModel.Expense
 {
@@ -32,8 +33,8 @@ namespace Managers.ViewModel.Expense
             Accounts = new ObservableCollection<Model.Account>();
             SelectedAccount = new Model.Account();
 
-            Categories = new ObservableCollection<IncomeCategory>();
-            SelectedCategory = new IncomeCategory();
+            Categories = new ObservableCollection<ExpenseCategory>();
+            SelectedCategory = new ExpenseCategory();
 
             PTypes = new ObservableCollection<PaymentType>();
             SelectedPaymentType = new PaymentType();
@@ -41,6 +42,8 @@ namespace Managers.ViewModel.Expense
             GetAccounts();
             GetCategories();
             GetPaymentTypes();
+
+            DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
         }
 
         #region Toggle
@@ -103,9 +106,9 @@ namespace Managers.ViewModel.Expense
             {
                 GetAccounts();
             }
-            if (message == "GetIncomeCategories")
+            if (message == "GetExpenseCategories")
             {
-               // GetCategories();
+                GetCategories();
             }
             if (message == "Save")
             {
@@ -164,10 +167,10 @@ namespace Managers.ViewModel.Expense
 
         #region Categories
 
-        private ObservableCollection<IncomeCategory> _Categories;
-        private IncomeCategory _SelectedCategory;
+        private ObservableCollection<ExpenseCategory> _Categories;
+        private ExpenseCategory _SelectedCategory;
 
-        public ObservableCollection<IncomeCategory> Categories
+        public ObservableCollection<ExpenseCategory> Categories
         {
             get
             {
@@ -181,7 +184,7 @@ namespace Managers.ViewModel.Expense
             }
         }
 
-        public IncomeCategory SelectedCategory
+        public ExpenseCategory SelectedCategory
         {
             get
             {
@@ -199,7 +202,7 @@ namespace Managers.ViewModel.Expense
         void GetCategories()
         {
             Categories.Clear();
-            foreach (var item in _ServiceProxy.GetIncomeCategories())
+            foreach (var item in _ServiceProxy.GetExpenseCategories())
             {
                 Categories.Add(item);
             }
@@ -252,6 +255,27 @@ namespace Managers.ViewModel.Expense
 
         #endregion
 
+        public ICommand DisplayAddCategoryCommand { get; }
+
+        private void ExecuteDiaplayAddCategory()
+        {
+            var viewModel = new AddExpenseCategoryViewModel();
+            var view = new AddExpenseCategoryView { DataContext = viewModel };
+
+            bool? result = view.ShowDialog();
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+
+                }
+                else
+                {
+                    //Cancelled
+                }
+            }
+        }
 
     }
 }
