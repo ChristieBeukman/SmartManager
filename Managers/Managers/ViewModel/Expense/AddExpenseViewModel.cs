@@ -43,7 +43,18 @@ namespace Managers.ViewModel.Expense
             GetCategories();
             GetPaymentTypes();
 
+            ExpenseTrans = new ExpenseTransaction();
+            int yyyy = DateTime.Now.Year;
+            int dd = DateTime.Now.Day;
+            int mm = DateTime.Now.Month;
+            Present = new DateTime(yyyy, mm, dd);
+            ExpenseTrans.Date = DateTime.Now.Date;
+            
+
             DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
+            AddExpenseTransactionCommand = new RelayCommand(ExecuteAddExpenseTransaction);
+            ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
+            ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
         }
 
         #region Toggle
@@ -197,7 +208,27 @@ namespace Managers.ViewModel.Expense
                 RaisePropertyChanged("SelectedCategory");
             }
         }
+        public ICommand DisplayAddCategoryCommand { get; }
 
+        private void ExecuteDiaplayAddCategory()
+        {
+            var viewModel = new AddExpenseCategoryViewModel();
+            var view = new AddExpenseCategoryView { DataContext = viewModel };
+
+            bool? result = view.ShowDialog();
+
+            if (result.HasValue)
+            {
+                if (result.Value)
+                {
+
+                }
+                else
+                {
+                    //Cancelled
+                }
+            }
+        }
 
         void GetCategories()
         {
@@ -243,6 +274,7 @@ namespace Managers.ViewModel.Expense
             }
         }
 
+
         void GetPaymentTypes()
         {
             PTypes.Clear();
@@ -255,27 +287,63 @@ namespace Managers.ViewModel.Expense
 
         #endregion
 
-        public ICommand DisplayAddCategoryCommand { get; }
+        #region AddExpense
 
-        private void ExecuteDiaplayAddCategory()
+        private ExpenseTransaction _ExpenseTrans;
+
+        public ExpenseTransaction ExpenseTrans
         {
-            var viewModel = new AddExpenseCategoryViewModel();
-            var view = new AddExpenseCategoryView { DataContext = viewModel };
-
-            bool? result = view.ShowDialog();
-
-            if (result.HasValue)
+            get
             {
-                if (result.Value)
-                {
+                return _ExpenseTrans;
+            }
 
+            set
+            {
+                _ExpenseTrans = value;
+                RaisePropertyChanged("ExpenseTrans");
+            }
+        }
+
+        private DateTime _Present;
+
+        public RelayCommand AddExpenseTransactionCommand { get; set; }
+
+        public DateTime Present
+        {
+            get
+            {
+                return _Present;
+            }
+
+            set
+            {
+                _Present = value;
+                RaisePropertyChanged("Present");
+            }
+        }
+
+        void ExecuteAddExpenseTransaction()
+        {
+            
+                if (ExpenseTrans.Amount < SelectedAccount.Balance)
+                {
+                    ExpenseTrans.AccountId = SelectedAccount.AccountId;
+                    ExpenseTrans.ExpenseCategoryId = SelectedCategory.ExpenseCategoryId;
+                    ExpenseTrans.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
+                    SelectedAccount.Balance = SelectedAccount.Balance - ExpenseTrans.Amount;
+                    _ServiceProxy.UpdateAccount(SelectedAccount);
+                    _ServiceProxy.AddExpenseTransaction(ExpenseTrans);
+                    GetAccounts();
+                    MessageBox.Show("Added");
                 }
                 else
                 {
-                    //Cancelled
+                    MessageBox.Show("Amount cannot be more than account balance");
                 }
-            }
         }
+
+        #endregion
 
     }
 }

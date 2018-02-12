@@ -153,6 +153,12 @@ namespace Managers.Services
             throw new NotImplementedException();
         }
 
+        public void AddExpenseTransaction(ExpenseTransaction i)
+        {
+            _Context.ExpenseTransactions.Add(i);
+            _Context.SaveChanges();
+        }
+
         #endregion
 
         #region Income
@@ -235,7 +241,8 @@ namespace Managers.Services
             return type;
         }
 
-  
+
+
         #endregion
 
 
