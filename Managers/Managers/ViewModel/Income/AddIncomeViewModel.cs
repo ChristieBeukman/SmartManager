@@ -38,6 +38,8 @@ namespace Managers.ViewModel.Income
             PTypes = new ObservableCollection<PaymentType>();
             SelectedPaymentType = new PaymentType();
 
+            NewTransaction = new Transaction();
+
             GetAccounts();
             GetCategories();
             GetPaymentTypes();
@@ -267,6 +269,7 @@ namespace Managers.ViewModel.Income
         #region Add
 
         private IncomeTransaction _IncTransaction;
+        private Transaction  _NewTransaction;
 
         public IncomeTransaction IncTransaction
         {
@@ -279,6 +282,20 @@ namespace Managers.ViewModel.Income
             {
                 _IncTransaction = value;
                 RaisePropertyChanged("IncTransaction");
+            }
+        }
+
+        public Transaction NewTransaction
+        {
+            get
+            {
+                return _NewTransaction;
+            }
+
+            set
+            {
+                _NewTransaction = value;
+                RaisePropertyChanged("NewTransaction");
             }
         }
 
@@ -309,7 +326,11 @@ namespace Managers.ViewModel.Income
                 IncTransaction.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
                 SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
                 _ServiceProxy.UpdateAccount(SelectedAccount);
-                _ServiceProxy.AddIncome(IncTransaction);
+                int i = _ServiceProxy.AddIncome(IncTransaction);
+                NewTransaction.AccountId = IncTransaction.AccountId;
+                NewTransaction.IncomeTransactionId = i;
+                NewTransaction.TransactionType = 0;
+                _ServiceProxy.AddTransaction(NewTransaction);
                 GetAccounts();
                 MessageBox.Show("Added");
             }
@@ -322,6 +343,7 @@ namespace Managers.ViewModel.Income
         #endregion
 
         public ICommand DisplayAddCategoryCommand{ get; }
+
 
         private void ExecuteDiaplayAddCategory()
         {

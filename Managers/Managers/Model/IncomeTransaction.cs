@@ -14,6 +14,12 @@ namespace Managers.Model
     
     public partial class IncomeTransaction
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IncomeTransaction()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int IncomeTransactionId { get; set; }
         public System.DateTime Date { get; set; }
         public string Details { get; set; }
@@ -24,6 +30,8 @@ namespace Managers.Model
     
         public virtual Account Account { get; set; }
         public virtual IncomeCategory IncomeCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual PaymentType PaymentType { get; set; }
     }
 }

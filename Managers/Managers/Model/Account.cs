@@ -19,6 +19,7 @@ namespace Managers.Model
         {
             this.ExpenseTransactions = new HashSet<ExpenseTransaction>();
             this.IncomeTransactions = new HashSet<IncomeTransaction>();
+            this.Transactions = new HashSet<Transaction>();
         }
     
         public int AccountId { get; set; }
@@ -34,5 +35,7 @@ namespace Managers.Model
         public virtual ICollection<ExpenseTransaction> ExpenseTransactions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IncomeTransaction> IncomeTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

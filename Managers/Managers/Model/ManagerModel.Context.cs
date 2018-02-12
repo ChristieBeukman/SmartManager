@@ -32,5 +32,6 @@ namespace Managers.Model
         public virtual DbSet<IncomeCategory> IncomeCategories { get; set; }
         public virtual DbSet<IncomeTransaction> IncomeTransactions { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
     }
 }

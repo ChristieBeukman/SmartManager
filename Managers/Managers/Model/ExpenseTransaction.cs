@@ -14,6 +14,12 @@ namespace Managers.Model
     
     public partial class ExpenseTransaction
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ExpenseTransaction()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int ExpenseTransactionId { get; set; }
         public System.DateTime Date { get; set; }
         public string Details { get; set; }
@@ -25,5 +31,7 @@ namespace Managers.Model
         public virtual Account Account { get; set; }
         public virtual ExpenseCategory ExpenseCategory { get; set; }
         public virtual PaymentType PaymentType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
