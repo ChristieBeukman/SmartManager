@@ -36,6 +36,10 @@ namespace Managers.Services
         //Expense
         ObservableCollection<ExpenseTransaction> GetExpenseTransactions(int accountid);
         void DeleteExoenseTransaction(ExpenseTransaction i);
-
+        //ExpenseCategory
+        ObservableCollection<ExpenseCategory> GetExpenseCategories();
+        void AddExpenseCategory(ExpenseCategory i);
+        void UpdateExpenseCategory(ExpenseCategory i);
+        void DeleteExpenseCategory(ExpenseCategory i);
     }
 }
