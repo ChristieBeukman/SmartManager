@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Managers.Model;
 using Managers.Model.ModelViews;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Managers.Services
 {
@@ -21,7 +22,7 @@ namespace Managers.Services
 
         //Income
         ObservableCollection<IncomeTransaction> GetIncomeTransactions(int accountId);
-        void AddIncome(IncomeTransaction i);
+        int AddIncome(IncomeTransaction i);
         void UpdateIncome(IncomeTransaction i);
         void DeleteIncomeTransaction(IncomeTransaction i);
 
@@ -42,5 +43,10 @@ namespace Managers.Services
         void AddExpenseCategory(ExpenseCategory i);
         void UpdateExpenseCategory(ExpenseCategory i);
         void DeleteExpenseCategory(ExpenseCategory i);
+        //Transaction
+        ObservableCollection<Transaction> GetTransactions();
+        void AddTransaction(Transaction i);
+        void DeleteTransaction(Transaction i);
+
     }
 }

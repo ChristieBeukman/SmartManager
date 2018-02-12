@@ -147,6 +147,9 @@
     <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Transaction.cs">
+      <DependentUpon>ManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Services\DataAccess.cs" />
     <Compile Include="Services\Dialog\ActionCommand.cs" />
     <Compile Include="Services\Dialog\DialogCloseRequestedArgs.cs" />
@@ -393,7 +396,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Balance\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

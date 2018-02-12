@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Managers.Model;
 using Managers.Model.ModelViews;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Managers.Services
 {
@@ -188,10 +189,11 @@ namespace Managers.Services
 
         }
 
-        public void AddIncome(IncomeTransaction i)
+        public int AddIncome(IncomeTransaction i)
         {
             _Context.IncomeTransactions.Add(i);
             _Context.SaveChanges();
+            return i.IncomeTransactionId;
         }
 
         public void UpdateIncome(IncomeTransaction i)
@@ -240,6 +242,24 @@ namespace Managers.Services
             }
             return type;
         }
+
+        public ObservableCollection<Transaction> GetTransactions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddTransaction(Transaction i)
+        {
+            _Context.Transactions.Add(i);
+            _Context.SaveChanges();
+            
+        }
+
+        public void DeleteTransaction(Transaction i)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
 
