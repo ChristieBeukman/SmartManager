@@ -49,6 +49,7 @@ namespace Managers.ViewModel.Expense
             int mm = DateTime.Now.Month;
             Present = new DateTime(yyyy, mm, dd);
             ExpenseTrans.Date = DateTime.Now.Date;
+            NewTransaction = new Transaction();
             
 
             DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
@@ -290,6 +291,7 @@ namespace Managers.ViewModel.Expense
         #region AddExpense
 
         private ExpenseTransaction _ExpenseTrans;
+        private Transaction _NewTransaction;
 
         public ExpenseTransaction ExpenseTrans
         {
@@ -304,6 +306,21 @@ namespace Managers.ViewModel.Expense
                 RaisePropertyChanged("ExpenseTrans");
             }
         }
+
+        public Transaction NewTransaction
+        {
+            get
+            {
+                return _NewTransaction;
+            }
+
+            set
+            {
+                _NewTransaction = value;
+                RaisePropertyChanged("NewTransaction");
+            }
+        }
+
 
         private DateTime _Present;
 
@@ -333,8 +350,12 @@ namespace Managers.ViewModel.Expense
                     ExpenseTrans.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
                     SelectedAccount.Balance = SelectedAccount.Balance - ExpenseTrans.Amount;
                     _ServiceProxy.UpdateAccount(SelectedAccount);
-                    _ServiceProxy.AddExpenseTransaction(ExpenseTrans);
-                    GetAccounts();
+                    int i = _ServiceProxy.AddExpenseTransaction(ExpenseTrans);
+                     NewTransaction.AccountId = ExpenseTrans.AccountId;
+                     NewTransaction.ExpenseTransactionId = i;
+                     NewTransaction.TransactionType = 1;
+                     _ServiceProxy.AddTransaction(NewTransaction);
+                GetAccounts();
                     MessageBox.Show("Added");
                 }
                 else

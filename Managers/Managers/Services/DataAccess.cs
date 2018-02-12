@@ -154,10 +154,11 @@ namespace Managers.Services
             throw new NotImplementedException();
         }
 
-        public void AddExpenseTransaction(ExpenseTransaction i)
+        public int AddExpenseTransaction(ExpenseTransaction i)
         {
             _Context.ExpenseTransactions.Add(i);
             _Context.SaveChanges();
+            return i.ExpenseTransactionId;
         }
 
         #endregion
