@@ -43,11 +43,14 @@ namespace Managers.ViewModel.Income
             GetPaymentTypes();
 
             IncTransaction = new IncomeTransaction();
+            int yyyy = DateTime.Now.Year;
+            int dd = DateTime.Now.Day;
+            int mm = DateTime.Now.Month;
+            Present = new DateTime(yyyy, mm, dd);
+            IncTransaction.Date = DateTime.Now;
             AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
             ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
             ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
-            dateTime = new DateTime();
-            dateTime = DateTime.Now;
             DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
            
         }
@@ -262,7 +265,6 @@ namespace Managers.ViewModel.Income
         #endregion
 
         #region Add
-        public DateTime dateTime;
 
         private IncomeTransaction _IncTransaction;
 
@@ -282,6 +284,21 @@ namespace Managers.ViewModel.Income
 
         public RelayCommand AddIncomeCommand { get; set; }
 
+        private DateTime _Present;
+
+        public DateTime Present
+        {
+            get
+            {
+                return _Present;
+            }
+
+            set
+            {
+                _Present = value;
+                RaisePropertyChanged("Present");
+            }
+        }
 
         void ExecuteAddIncome()
         {

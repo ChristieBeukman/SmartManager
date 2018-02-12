@@ -161,10 +161,9 @@
                                     Height="24"
                                     Style="{DynamicResource DatePickerStyle}" 
                                      SelectedDate="{Binding addIncomeViewModel.IncTransaction.Date,Source={StaticResource Locator}}"
-                                    DisplayDate="{Binding addIncomeViewModel.datetime ,Source={StaticResource Locator}}"
-                                    Text="{Binding addIncomeViewModel.datetime ,Source={StaticResource Locator}}"
                                     Foreground="White" 
                                     Margin="15,9,28,8" FirstDayOfWeek="Monday" 
+                                    DisplayDateStart="{Binding addIncomeViewModel.Present,Source={StaticResource Locator}}"
                                    
                                     />
                         <!--Amount-->

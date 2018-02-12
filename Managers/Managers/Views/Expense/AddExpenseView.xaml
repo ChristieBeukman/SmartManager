@@ -160,11 +160,11 @@
                                     Grid.Row="2"
                                     Height="24"
                                     Style="{DynamicResource DatePickerStyle}" 
-                                     SelectedDate="{Binding addIncomeViewModel.IncTransaction.Date,Source={StaticResource Locator}}"
-                                    DisplayDate="{Binding addIncomeViewModel.datetime ,Source={StaticResource Locator}}"
-                                    Text="{Binding addIncomeViewModel.datetime ,Source={StaticResource Locator}}"
+                                     SelectedDate="{Binding addExpenseViewModel.ExpenseTrans.Date,Source={StaticResource Locator}}"                         
                                     Foreground="White" 
-                                    Margin="15,9,28,8" FirstDayOfWeek="Monday" 
+                                    Margin="15,9,28,8" 
+                                    FirstDayOfWeek="Monday" 
+                                    DisplayDateStart="{Binding addExpenseViewModel.Present, Source={StaticResource Locator}}" 
                                    
                                     />
                         <!--Amount-->
@@ -172,14 +172,14 @@
                                 Grid.Column="1" 
                                 Foreground="White"
                                  Height="24"
-                                 IsReadOnly="{Binding addIncomeViewModel.ToggleAmount,Source={StaticResource Locator}}"
+                                 IsReadOnly="{Binding addExpenseViewModel.ToggleAmount,Source={StaticResource Locator}}"
                                 FontFamily="Copperplate Gothic Light" 
-                                 key:EnterKeyHelper.EnterKeyCommand="{Binding addIncomeViewModel.ToggleAmmountCommand,Source={StaticResource Locator}}"
-                                 Text="{Binding addIncomeViewModel.IncTransaction.Amount,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
+                                 key:EnterKeyHelper.EnterKeyCommand="{Binding addExpenseViewModel.ToggleAmmountCommand,Source={StaticResource Locator}}"
+                                 Text="{Binding addExpenseViewModel.ExpenseTrans.Amount,Source={StaticResource Locator},StringFormat=C,ConverterCulture=en-ZA}"
                                 Style="{DynamicResource GlassTextBox}" FontSize="10" Margin="15,8,28,9" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
-                                    <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding addIncomeViewModel.ToggleAmmountCommand,Source={StaticResource Locator}}"/>
+                                    <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding addExpenseViewModel.ToggleAmmountCommand,Source={StaticResource Locator}}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -225,14 +225,14 @@
                                  Height="24"
                                  Foreground="White"
                                  Width="170"
-                                 IsReadOnly="{Binding addIncomeViewModel.ToggleDetails,Source={StaticResource Locator}}"
-                                 Text="{Binding addIncomeViewModel.IncTransaction.Details ,Source={StaticResource Locator}}"
+                                 IsReadOnly="{Binding addExpenseViewModel.ToggleDetails,Source={StaticResource Locator}}"
+                                 Text="{Binding addExpenseViewModel.ExpenseTrans.Details ,Source={StaticResource Locator}}"
                                 FontFamily="Copperplate Gothic Light" 
-                                 key:EnterKeyHelper.EnterKeyCommand="{Binding addIncomeViewModel.ToggleDetailsCommand,Source={StaticResource Locator}}"
+                                 key:EnterKeyHelper.EnterKeyCommand="{Binding addExpenseViewModel.ToggleDetailsCommand,Source={StaticResource Locator}}"
                                 Style="{DynamicResource GlassTextBox}" FontSize="10" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
-                                    <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding addIncomeViewModel.ToggleDetailsCommand,Source={StaticResource Locator}}"/>
+                                    <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding addExpenseViewModel.ToggleDetailsCommand,Source={StaticResource Locator}}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -273,7 +273,7 @@
                             Height="35"
                             Width="35"
                             Background="Black"
-                            Command="{Binding addIncomeViewModel.AddIncomeCommand,Source={StaticResource Locator}}"
+                            Command="{Binding addExpenseViewModel.AddExpenseTransactionCommand,Source={StaticResource Locator}}"
                             Style="{DynamicResource GlassSaveButton}"/>
 
                     <Ellipse Grid.Column="1"
