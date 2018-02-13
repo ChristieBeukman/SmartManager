@@ -49,6 +49,7 @@ namespace Managers.ViewModel.Income
             int dd = DateTime.Now.Day;
             int mm = DateTime.Now.Month;
             Present = new DateTime(yyyy, mm, dd);
+            Present = DateTime.Now.Subtract(TimeSpan.FromHours(24));
             IncTransaction.Date = DateTime.Now;
             AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
             ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);

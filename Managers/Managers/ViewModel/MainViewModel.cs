@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using Managers.ViewModel.Account;
 using Managers.ViewModel.Income;
 using Managers.ViewModel.Expense;
+using Managers.ViewModel.Balance;
 
 namespace Managers.ViewModel
 {
@@ -68,6 +69,18 @@ namespace Managers.ViewModel
 
         #endregion
 
+        #region Balance
+        private static readonly BalanceViewModel balanceViewModel= new BalanceViewModel();
+        public RelayCommand ViewBalanceCommand { get; set; }
+
+        void ExecuteViewBalance()
+        {
+            CurrentViewModel = MainViewModel.balanceViewModel;
+        }
+
+        #endregion
+
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -77,6 +90,8 @@ namespace Managers.ViewModel
             ViewAddIncomeCommand = new RelayCommand(ExecuteViewAddIncome);
             ViewEditIncomeCommand = new RelayCommand(ExecuteViewEditIncome);
             ViewAddExpenseCommand = new RelayCommand(ExecutViewAddExpense);
+            ViewBalanceCommand = new RelayCommand(ExecuteViewBalance);
+
         }
     }
 }

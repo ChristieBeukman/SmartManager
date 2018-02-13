@@ -14,6 +14,8 @@
              xmlns:ViewInc="clr-namespace:Managers.Views.Income"
               xmlns:vmEx="clr-namespace:Managers.ViewModel.Expense"
               xmlns:ViewEx="clr-namespace:Managers.Views.Expense"
+              xmlns:vmBalance="clr-namespace:Managers.ViewModel.Balance"
+              xmlns:viewBalance="clr-namespace:Managers.Views.Balance"
              >
   <Application.Resources>
     <ResourceDictionary>
@@ -38,6 +40,10 @@
 
             <DataTemplate DataType="{x:Type vmEx:AddExpenseViewModel}">
                 <ViewEx:AddExpenseView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vmBalance:BalanceViewModel}">
+                <viewBalance:AccountBalanceView/>
             </DataTemplate>
 
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />

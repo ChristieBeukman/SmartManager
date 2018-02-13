@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="133df7613dcf4a53b3aba79ecace78f1" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Model.Account" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.AccountType" Width="1.5" PointX="1.5" PointY="9.625" />
-        <EntityTypeShape EntityType="Model.ExpenseCategory" Width="1.5" PointX="0.75" PointY="12.625" />
-        <EntityTypeShape EntityType="Model.ExpenseTransaction" Width="1.5" PointX="3" PointY="4.875" />
-        <EntityTypeShape EntityType="Model.IncomeCategory" Width="1.5" PointX="3.75" PointY="1.75" />
-        <EntityTypeShape EntityType="Model.IncomeTransaction" Width="1.5" PointX="6" PointY="4.875" />
-        <EntityTypeShape EntityType="Model.PaymentType" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="Model.Transaction" Width="1.5" PointX="8.25" PointY="5.25" />
+        <EntityTypeShape EntityType="Model.Account" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="Model.AccountType" Width="1.5" PointX="1.5" PointY="12.875" />
+        <EntityTypeShape EntityType="Model.ExpenseCategory" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="Model.ExpenseTransaction" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="Model.IncomeCategory" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.IncomeTransaction" Width="1.5" PointX="6" PointY="4" />
+        <EntityTypeShape EntityType="Model.PaymentType" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="Model.Transaction" Width="1.5" PointX="8.25" PointY="4.125" />
         <AssociationConnector Association="Model.FK_Account_AccountType" />
         <AssociationConnector Association="Model.FK_ExpenseTransaction_Account" />
         <AssociationConnector Association="Model.FK_IncomeTransaction_Account" />

@@ -10,9 +10,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid Width="{TemplateBinding Width}"
                           Height="{TemplateBinding Height}">
-                        <Grid.Effect>
-                            <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
-                        </Grid.Effect>
+                       
                         <Path x:Name="Base" Data="M15.960526,7.75 L15.960526,15.960526 7.75,15.960526 7.75,19.039474 15.960526,19.039474 15.960526,27.25 19.039474,27.25 19.039474,19.039474 27.25,19.039474 27.25,15.960526 19.039474,15.960526 19.039474,7.75 z M17.5,0 C27.164984,0 35,7.8350167 35,17.5 35,27.164984 27.164984,35 17.5,35 7.8350167,35 0,27.164984 0,17.5 0,7.8350167 7.8350167,0 17.5,0 z" Fill="{TemplateBinding Background}" Stretch="Fill" StrokeThickness="0.2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto">
                             <Path.Stroke>
                                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">

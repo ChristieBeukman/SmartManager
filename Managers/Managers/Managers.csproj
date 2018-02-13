@@ -144,6 +144,7 @@
     </Compile>
     <Compile Include="Model\ModelViews\Account_AccountType.cs" />
     <Compile Include="Model\ModelViews\Income_Accounts_Category.cs" />
+    <Compile Include="Model\ModelViews\TransactionViews.cs" />
     <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ManagerModel.tt</DependentUpon>
     </Compile>
@@ -164,6 +165,7 @@
     <Compile Include="ViewModel\Account\AccountManagementViewModel.cs" />
     <Compile Include="ViewModel\Account\AddAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
+    <Compile Include="ViewModel\Balance\BalanceViewModel.cs" />
     <Compile Include="ViewModel\Expense\AddExpenseCategoryViewModel.cs" />
     <Compile Include="ViewModel\Expense\AddExpenseViewModel.cs" />
     <Compile Include="ViewModel\Income\AddCategoryViewModel.cs" />
@@ -179,6 +181,9 @@
     </Compile>
     <Compile Include="Views\Accounts\EditAccountView.xaml.cs">
       <DependentUpon>EditAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Balance\AccountBalanceView.xaml.cs">
+      <DependentUpon>AccountBalanceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Expense\AddExpenseCategoryView.xaml.cs">
       <DependentUpon>AddExpenseCategoryView.xaml</DependentUpon>
@@ -219,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Accounts\EditAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Balance\AccountBalanceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,9 +405,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Balance\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

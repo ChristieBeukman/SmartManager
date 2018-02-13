@@ -244,10 +244,6 @@ namespace Managers.Services
             return type;
         }
 
-        public ObservableCollection<Transaction> GetTransactions()
-        {
-            throw new NotImplementedException();
-        }
 
         public void AddTransaction(Transaction i)
         {
@@ -261,7 +257,35 @@ namespace Managers.Services
             throw new NotImplementedException();
         }
 
+        public ObservableCollection<TransactionViews> GetTransactions(int AccountId)
+        {
+            ObservableCollection<TransactionViews> trans = new ObservableCollection<TransactionViews>();
 
+            var Query = (from t in _Context.Transactions
+                         join a in _Context.Accounts
+                         on t.AccountId equals a.AccountId
+                         join i in _Context.IncomeTransactions
+                         on t.IncomeTransactionId equals i.IncomeTransactionId
+                         join e in _Context.ExpenseTransactions
+                         on t.ExpenseTransactionId equals e.ExpenseTransactionId
+                         where a.AccountId == AccountId
+                         select new TransactionViews
+                         {
+                             AccountId = t.AccountId,
+                             ExpenseTransactionId = t.ExpenseTransactionId,
+                             IncomeTransactionId = t.IncomeTransactionId,
+                             Balance = a.Balance,
+                             ExpenseAmount =e.Amount,
+                             IncomeAmount = i.Amount,
+                             ExpenseDetails = e.Details,
+                             IncomeDetails = i.Details,
+                             ExpenseDate = e.Date,
+                             IncomeDate = i.Date,
+
+                         }).ToList();
+
+            return trans;
+        }
 
 
         #endregion

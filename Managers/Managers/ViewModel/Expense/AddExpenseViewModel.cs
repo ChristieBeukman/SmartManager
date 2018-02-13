@@ -44,10 +44,12 @@ namespace Managers.ViewModel.Expense
             GetPaymentTypes();
 
             ExpenseTrans = new ExpenseTransaction();
+            
             int yyyy = DateTime.Now.Year;
             int dd = DateTime.Now.Day;
             int mm = DateTime.Now.Month;
             Present = new DateTime(yyyy, mm, dd);
+            Present = DateTime.Now.Subtract(TimeSpan.FromHours(24));
             ExpenseTrans.Date = DateTime.Now.Date;
             NewTransaction = new Transaction();
             

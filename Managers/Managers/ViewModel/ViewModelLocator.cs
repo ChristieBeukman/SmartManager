@@ -6,6 +6,7 @@ using Microsoft.Practices.ServiceLocation;
 using Managers.ViewModel.Account;
 using Managers.ViewModel.Income;
 using Managers.ViewModel.Expense;
+using Managers.ViewModel.Balance;
 
 namespace Managers.ViewModel
 {
@@ -30,6 +31,7 @@ namespace Managers.ViewModel
             SimpleIoc.Default.Register<AddCategoryViewModel>();
             SimpleIoc.Default.Register<AddExpenseViewModel>();
             SimpleIoc.Default.Register<AddExpenseCategoryViewModel>();
+            SimpleIoc.Default.Register<BalanceViewModel>();
         }
 
         public MainViewModel Main
@@ -99,6 +101,14 @@ namespace Managers.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<AddExpenseCategoryViewModel>();
+            }
+        }
+
+        public BalanceViewModel balanceViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<BalanceViewModel>();
             }
         }
 
