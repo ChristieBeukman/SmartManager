@@ -19,7 +19,7 @@ namespace Managers.Model
         public int TransactionType { get; set; }
         public Nullable<int> IncomeTransactionId { get; set; }
         public Nullable<int> ExpenseTransactionId { get; set; }
-        public Nullable<decimal> Balance { get; set; }
+        public decimal Balance { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual ExpenseTransaction ExpenseTransaction { get; set; }

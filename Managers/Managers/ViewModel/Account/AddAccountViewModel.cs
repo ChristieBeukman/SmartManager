@@ -187,6 +187,8 @@ namespace Managers.ViewModel.Account
 
         }
 
+        private string _Culture;
+
         private void GetCountries()
         {
             Countries.Clear();
@@ -194,7 +196,7 @@ namespace Managers.ViewModel.Account
                           .Select(x => new RegionInfo(x.LCID));
 
             var countries = (from x in region
-                             select new DDLStructure() { Symbol = x.CurrencySymbol, Name = x.EnglishName })
+                             select new DDLStructure() { Symbol = x.ISOCurrencySymbol, Name = x.TwoLetterISORegionName })
                          .Distinct()
                          .OrderBy(x => x.Name)
                          .ToList<DDLStructure>();
@@ -270,6 +272,20 @@ namespace Managers.ViewModel.Account
 
         public RelayCommand AddAccountCommand { get; set; }
 
+        public string Culture
+        {
+            get
+            {
+                return _Culture;
+            }
+
+            set
+            {
+                _Culture = "en-" + value;
+                RaisePropertyChanged("Culture");
+            }
+        }
+
         void ExecuteAddAccount()
         {
             var result = MessageBox.Show("Add Account?", "Save", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -288,6 +304,7 @@ namespace Managers.ViewModel.Account
                     _ServiceProxy.AddAccount(account);
                     GetAccountTypes();
                     GetCountries();
+                    account.Name = string.Empty;
                     account.AccountNum = string.Empty;
                     account.Balance = 0;
                     account.Bank = string.Empty;
@@ -295,6 +312,7 @@ namespace Managers.ViewModel.Account
                     account.CurrencyCountry = string.Empty;
                     MessageBox.Show("Saved");
                     SendUpdateMessage("GetAccounts");
+
                     break;
                 case MessageBoxResult.No:
                     break;

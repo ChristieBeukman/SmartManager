@@ -78,7 +78,7 @@
           <Property Name="TransactionType" Type="int" Nullable="false" />
           <Property Name="IncomeTransactionId" Type="int" />
           <Property Name="ExpenseTransactionId" Type="int" />
-          <Property Name="Balance" Type="money" />
+          <Property Name="Balance" Type="money" Nullable="false" />
         </EntityType>
         <Association Name="FK_Account_AccountType">
           <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
@@ -394,7 +394,7 @@
           <Property Name="TransactionType" Type="Int32" Nullable="false" />
           <Property Name="IncomeTransactionId" Type="Int32" />
           <Property Name="ExpenseTransactionId" Type="Int32" />
-          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="Account" Relationship="Model.FK_Transactions_Account" FromRole="Transaction" ToRole="Account" />
           <NavigationProperty Name="ExpenseTransaction" Relationship="Model.FK_Transactions_ExpenseTransaction" FromRole="Transaction" ToRole="ExpenseTransaction" />
           <NavigationProperty Name="IncomeTransaction" Relationship="Model.FK_IncomeTransaction_IncomeTransaction" FromRole="Transaction" ToRole="IncomeTransaction" />

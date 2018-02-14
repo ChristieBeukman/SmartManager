@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Command;
 using Managers.ViewModel.Account;
 using Managers.ViewModel.Income;
@@ -33,6 +34,7 @@ namespace Managers.ViewModel
         void ExecuteViewAccountManagement()
         {
             CurrentViewModel = MainViewModel.accountManagementViewModel;
+            NewObject("AccountManagement");
         }
 
         #endregion
@@ -44,6 +46,7 @@ namespace Managers.ViewModel
         void ExecuteViewAddIncome()
         {
             CurrentViewModel = MainViewModel.addIncomeViewModel;
+            NewObject("AddIncome");
         }
         #endregion
 
@@ -80,6 +83,14 @@ namespace Managers.ViewModel
 
         #endregion
 
+        #region Nessenger
+
+        void NewObject(string i)
+        {
+            MessengerInstance.Send<GenericMessage<string>>(new GenericMessage<string>(i));
+        }
+
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.

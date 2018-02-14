@@ -11,6 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="300">
     <UserControl.Resources>
         <tool:BoolVisibleInvisibleConverter x:Key="Convert"/>
+        <local:AccountManagementView x:Key="c"/>
     </UserControl.Resources>
 
     <DockPanel>
@@ -249,7 +250,7 @@
                                  Grid.Column="1"
                                  Height="24"
                                  Width="100"
-                                 Text="{Binding addAccountViewModel.account.Balance,StringFormat=C,ConverterCulture=en-ZA ,Source={StaticResource Locator}}"
+                                 Text="{Binding addAccountViewModel.account.Balance, Source={StaticResource Locator}, StringFormat=\{0:{Culture}\}}"
                                  Foreground="White"
                                  FontFamily="Copperplate Gothic Light" 
                                  FontSize="10"

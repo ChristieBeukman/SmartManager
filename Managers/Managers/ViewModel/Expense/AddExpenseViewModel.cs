@@ -344,26 +344,18 @@ namespace Managers.ViewModel.Expense
 
         void ExecuteAddExpenseTransaction()
         {
-            
-                if (ExpenseTrans.Amount < SelectedAccount.Balance)
-                {
-                    ExpenseTrans.AccountId = SelectedAccount.AccountId;
-                    ExpenseTrans.ExpenseCategoryId = SelectedCategory.ExpenseCategoryId;
-                    ExpenseTrans.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
-                    SelectedAccount.Balance = SelectedAccount.Balance - ExpenseTrans.Amount;
-                    _ServiceProxy.UpdateAccount(SelectedAccount);
-                    int i = _ServiceProxy.AddExpenseTransaction(ExpenseTrans);
-                     NewTransaction.AccountId = ExpenseTrans.AccountId;
-                     NewTransaction.ExpenseTransactionId = i;
-                     NewTransaction.TransactionType = 1;
-                     _ServiceProxy.AddTransaction(NewTransaction);
-                GetAccounts();
-                    MessageBox.Show("Added");
-                }
-                else
-                {
-                    MessageBox.Show("Amount cannot be more than account balance");
-                }
+            ExpenseTrans.AccountId = SelectedAccount.AccountId;
+            ExpenseTrans.ExpenseCategoryId = SelectedCategory.ExpenseCategoryId;
+            ExpenseTrans.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
+            SelectedAccount.Balance = SelectedAccount.Balance - ExpenseTrans.Amount;
+            _ServiceProxy.UpdateAccount(SelectedAccount);
+            int i = _ServiceProxy.AddExpenseTransaction(ExpenseTrans);
+            NewTransaction.AccountId = ExpenseTrans.AccountId;
+            NewTransaction.ExpenseTransactionId = i;
+            NewTransaction.TransactionType = 1;
+            _ServiceProxy.AddTransaction(NewTransaction);
+            GetAccounts();
+            MessageBox.Show("Added");
         }
 
         #endregion

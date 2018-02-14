@@ -44,7 +44,8 @@ namespace Managers.Services
         void UpdateExpenseCategory(ExpenseCategory i);
         void DeleteExpenseCategory(ExpenseCategory i);
         //Transaction
-        ObservableCollection<TransactionViews> GetTransactions(int AccountId);
+        ObservableCollection<TransactionViews> GetTransactions(int AccountId,bool Income,bool Expense);
+
         void AddTransaction(Transaction i);
         void DeleteTransaction(Transaction i);
 

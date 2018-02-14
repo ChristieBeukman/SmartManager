@@ -24,7 +24,7 @@ namespace Managers.Model.ModelViews
         public System.DateTime IncomeDate { get; set; }
         public string IncomeDetails { get; set; }
         public decimal IncomeAmount { get; set; }
-        public int PaymentTypeId { get; set; }
+        public int IncPaymentTypeId { get; set; }
         public int IncomeCategoryId { get; set; }
 
         public Nullable<int> ExpenseTransactionId { get; set; }
@@ -32,5 +32,6 @@ namespace Managers.Model.ModelViews
         public string ExpenseDetails { get; set; }
         public decimal ExpenseAmount { get; set; }
         public int ExpenseCategoryId { get; set; }
+        public int ExpensePaymentTypeId { get; set; }
     }
 }

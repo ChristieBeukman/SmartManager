@@ -24,38 +24,8 @@ namespace Managers.ViewModel.Income
 
         public AddIncomeViewModel()
         {
-            _ServiceProxy = new DataAccess();
-            toggle = new ToggleControl();
-
-            MessengerInstance.Register<GenericMessage<string>>(this, ReceiveUpdateMessage);
-
-            Accounts = new ObservableCollection<Model.Account>();
-            SelectedAccount = new Model.Account();
-
-            Categories = new ObservableCollection<IncomeCategory>();
-            SelectedCategory = new IncomeCategory();
-
-            PTypes = new ObservableCollection<PaymentType>();
-            SelectedPaymentType = new PaymentType();
-
-            NewTransaction = new Transaction();
-
-            GetAccounts();
-            GetCategories();
-            GetPaymentTypes();
-
-            IncTransaction = new IncomeTransaction();
-            int yyyy = DateTime.Now.Year;
-            int dd = DateTime.Now.Day;
-            int mm = DateTime.Now.Month;
-            Present = new DateTime(yyyy, mm, dd);
-            Present = DateTime.Now.Subtract(TimeSpan.FromHours(24));
-            IncTransaction.Date = DateTime.Now;
-            AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
-            ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
-            ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
+            IntitialiseObjects();
             DisplayAddCategoryCommand = new ActionCommand(p => ExecuteDiaplayAddCategory());
-           
         }
 
         #region Toggle
@@ -114,21 +84,68 @@ namespace Managers.ViewModel.Income
         void ReceiveUpdateMessage(GenericMessage<string> genericMessage)
         {
             string message = genericMessage.Content;
-            if (message == "GetAccounts")
+            switch (message)
             {
-                GetAccounts();
+                case "AddIncome":
+                    IntitialiseObjects();
+                    break;
+                case "GetAccounts":
+                    GetAccounts();
+                    break;
+                case "GetIncomeCategories":
+                    GetCategories();
+                    break;
+                default:
+                    break;
             }
-            if (message == "GetIncomeCategories")
-            {
-                GetCategories();
-            }
-            if (message == "Save")
-            {
-                //SaveVisible = true;
-                //DeleteVisible = false;
-            }
+            //if (message == "GetAccounts")
+            //{
+            //    GetAccounts();
+            //}
+            //if (message == "GetIncomeCategories")
+            //{
+            //    GetCategories();
+            //}
+            //if (message == "Save")
+            //{
+            //    //SaveVisible = true;
+            //    //DeleteVisible = false;
+            //}
         }
 
+        void IntitialiseObjects()
+        {
+            _ServiceProxy = new DataAccess();
+            toggle = new ToggleControl();
+
+            MessengerInstance.Register<GenericMessage<string>>(this, ReceiveUpdateMessage);
+
+            Accounts = new ObservableCollection<Model.Account>();
+            SelectedAccount = new Model.Account();
+
+            Categories = new ObservableCollection<IncomeCategory>();
+            SelectedCategory = new IncomeCategory();
+
+            PTypes = new ObservableCollection<PaymentType>();
+            SelectedPaymentType = new PaymentType();
+
+            NewTransaction = new Transaction();
+
+            GetAccounts();
+            GetCategories();
+            GetPaymentTypes();
+
+            IncTransaction = new IncomeTransaction();
+            int yyyy = DateTime.Now.Year;
+            int dd = DateTime.Now.Day;
+            int mm = DateTime.Now.Month;
+            Present = new DateTime(yyyy, mm, dd);
+            Present = DateTime.Now.Subtract(TimeSpan.FromHours(24));
+            IncTransaction.Date = DateTime.Now;
+            AddIncomeCommand = new RelayCommand(ExecuteAddIncome);
+            ToggleAmmountCommand = new RelayCommand(ExecuteToggleAmount);
+            ToggleDetailsCommand = new RelayCommand(ExecuteToggleDetails);
+        }
         #endregion
 
         #region Accounts
@@ -320,26 +337,19 @@ namespace Managers.ViewModel.Income
 
         void ExecuteAddIncome()
         {
-            if (IncTransaction.Date >= DateTime.Now)
-            {
-                IncTransaction.AccountId = SelectedAccount.AccountId;
-                IncTransaction.IncomeCategoryId = SelectedCategory.IncomeCategoryId;
-                IncTransaction.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
-                SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
-                _ServiceProxy.UpdateAccount(SelectedAccount);
-                int i = _ServiceProxy.AddIncome(IncTransaction);
-                NewTransaction.AccountId = IncTransaction.AccountId;
-                NewTransaction.IncomeTransactionId = i;
-                NewTransaction.TransactionType = 0;
-                _ServiceProxy.AddTransaction(NewTransaction);
-                GetAccounts();
-                MessageBox.Show("Added");
-            }
-            else
-            {
-                MessageBox.Show("Date cannot be before present");
-            }
-            
+            IncTransaction.AccountId = SelectedAccount.AccountId;
+            IncTransaction.IncomeCategoryId = SelectedCategory.IncomeCategoryId;
+            IncTransaction.PaymentTypeId = SelectedPaymentType.PaymentTypeId;
+            SelectedAccount.Balance = SelectedAccount.Balance + IncTransaction.Amount;
+            _ServiceProxy.UpdateAccount(SelectedAccount);
+            int i = _ServiceProxy.AddIncome(IncTransaction);
+            NewTransaction.AccountId = IncTransaction.AccountId;
+            NewTransaction.IncomeTransactionId = i;
+            NewTransaction.TransactionType = 0;
+            _ServiceProxy.AddTransaction(NewTransaction);
+            GetAccounts();
+            MessageBox.Show("Added");
+            IntitialiseObjects();
         }
         #endregion
 

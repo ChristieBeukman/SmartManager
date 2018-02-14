@@ -257,32 +257,116 @@ namespace Managers.Services
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<TransactionViews> GetTransactions(int AccountId)
+        public ObservableCollection<TransactionViews> GetTransactions(int AccountId, bool Income, bool Expense)
         {
             ObservableCollection<TransactionViews> trans = new ObservableCollection<TransactionViews>();
+            if (Income == true && Expense == true)
+            {
+                var Query = (from t in _Context.Transactions
+                             join a in _Context.Accounts
+                             on t.AccountId equals a.AccountId
+                             join i in _Context.IncomeTransactions
+                             on t.IncomeTransactionId equals i.IncomeTransactionId
+                             join e in _Context.ExpenseTransactions
+                             on t.ExpenseTransactionId equals e.ExpenseTransactionId
+                             where a.AccountId == AccountId
+                             select new TransactionViews
+                             {
+                                 AccountId = t.AccountId,
+                                 ExpenseTransactionId = t.ExpenseTransactionId,
+                                 IncomeTransactionId = t.IncomeTransactionId,
+                                 Balance = a.Balance,
+                                 ExpenseAmount = e.Amount,
+                                 IncomeAmount = i.Amount,
+                                 ExpenseDetails = e.Details,
+                                 IncomeDetails = i.Details,
+                                 ExpenseDate = e.Date,
+                                 IncomeDate = i.Date,
+                                 AccountNum = a.AccountNum,
+                                 TransactionId = t.TransactionId,
+                                 IncPaymentTypeId = i.PaymentTypeId,
+                                 ExpensePaymentTypeId = e.PaymentTypeId,
+                                 Name = a.Name,
 
-            var Query = (from t in _Context.Transactions
-                         join a in _Context.Accounts
-                         on t.AccountId equals a.AccountId
-                         join i in _Context.IncomeTransactions
-                         on t.IncomeTransactionId equals i.IncomeTransactionId
-                         join e in _Context.ExpenseTransactions
-                         on t.ExpenseTransactionId equals e.ExpenseTransactionId
-                         where a.AccountId == AccountId
-                         select new TransactionViews
-                         {
-                             AccountId = t.AccountId,
-                             ExpenseTransactionId = t.ExpenseTransactionId,
-                             IncomeTransactionId = t.IncomeTransactionId,
-                             Balance = a.Balance,
-                             ExpenseAmount =e.Amount,
-                             IncomeAmount = i.Amount,
-                             ExpenseDetails = e.Details,
-                             IncomeDetails = i.Details,
-                             ExpenseDate = e.Date,
-                             IncomeDate = i.Date,
+                             }).ToList();
+                foreach (var item in Query)
+                {
+                    trans.Add(item);
+                }
 
-                         }).ToList();
+            }
+            if (Income == true && Expense == false)
+            {
+                var Query = (from t in _Context.Transactions
+                             join a in _Context.Accounts
+                             on t.AccountId equals a.AccountId
+                             join i in _Context.IncomeTransactions
+                             on t.IncomeTransactionId equals i.IncomeTransactionId
+                             join e in _Context.ExpenseTransactions
+                             on t.ExpenseTransactionId equals e.ExpenseTransactionId
+                             where a.AccountId == AccountId
+                             where t.TransactionType == 0
+                             select new TransactionViews
+                             {
+                                 AccountId = t.AccountId,
+                                 ExpenseTransactionId = t.ExpenseTransactionId,
+                                 IncomeTransactionId = t.IncomeTransactionId,
+                                 Balance = a.Balance,
+                                 ExpenseAmount = e.Amount,
+                                 IncomeAmount = i.Amount,
+                                 ExpenseDetails = e.Details,
+                                 IncomeDetails = i.Details,
+                                 ExpenseDate = e.Date,
+                                 IncomeDate = i.Date,
+                                 AccountNum = a.AccountNum,
+                                 TransactionId = t.TransactionId,
+                                 IncPaymentTypeId = i.PaymentTypeId,
+                                 ExpensePaymentTypeId = e.PaymentTypeId,
+                                 Name = a.Name,
+
+                             }).ToList();
+                foreach (var item in Query)
+                {
+                    trans.Add(item);
+                }
+
+            }
+            if (Income == false && Expense == true)
+            {
+                var Query = (from t in _Context.Transactions
+                             join a in _Context.Accounts
+                             on t.AccountId equals a.AccountId
+                             join i in _Context.IncomeTransactions
+                             on t.IncomeTransactionId equals i.IncomeTransactionId
+                             join e in _Context.ExpenseTransactions
+                             on t.ExpenseTransactionId equals e.ExpenseTransactionId
+                             where a.AccountId == AccountId
+                             where t.TransactionType == 1
+                             select new TransactionViews
+                             {
+                                 AccountId = t.AccountId,
+                                 ExpenseTransactionId = t.ExpenseTransactionId,
+                                 IncomeTransactionId = t.IncomeTransactionId,
+                                 Balance = t.Balance,
+                                 ExpenseAmount = e.Amount,
+                                 IncomeAmount = i.Amount,
+                                 ExpenseDetails = e.Details,
+                                 IncomeDetails = i.Details,
+                                 ExpenseDate = e.Date,
+                                 IncomeDate = i.Date,
+                                 AccountNum = a.AccountNum,
+                                 TransactionId = t.TransactionId,
+                                 IncPaymentTypeId = i.PaymentTypeId,
+                                 ExpensePaymentTypeId = e.PaymentTypeId,
+                                 Name = a.Name,
+
+                             }).ToList();
+                foreach (var item in Query)
+                {
+                    trans.Add(item);
+                }
+
+            }
 
             return trans;
         }
